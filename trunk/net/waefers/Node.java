@@ -1,7 +1,9 @@
 package net.waefers;
 
+import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * 
@@ -10,12 +12,14 @@ import java.util.ArrayList;
  * @author Michael Ansel
  *
  */
-public class NodeInfo {
+public class Node implements java.io.Serializable {
 	
+	static final long serialVersionUID = 0;
+
 	/**
 	 * Node URI
 	 */
-	URI uri;
+	public URI uri;
 	
 	/**
 	 * Possible node types
@@ -25,23 +29,20 @@ public class NodeInfo {
 	/**
 	 * Node type
 	 */
-	private NodeType type;
+	public NodeType type;
 	
 	/**
 	 * ArrayList of data stored on peer
 	 */
-	ArrayList<Integer> dataStored = new ArrayList<Integer>();
+	public HashSet<Integer> dataStored = new HashSet<Integer>();
+	
+	/**
+	 * Node external InetSocketAddress
+	 */
+	public InetSocketAddress address;
 	
 	public boolean isPeer() {
 		return type == NodeType.PEER;
-	}
-	
-	public void setURI(URI uri) {
-		this.uri = uri;
-	}
-	
-	public URI getURI() {
-		return uri;
 	}
 	
 	public String toString() {

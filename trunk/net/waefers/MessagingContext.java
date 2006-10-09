@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.SocketAddress;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
@@ -26,19 +27,19 @@ public class MessagingContext {
 	/**
 	 * DatagramChannel to be used for message communications
 	 */
-	private DatagramChannel socket;
+	private static DatagramChannel socket;
 	
 	/**
 	 * Receive buffer
 	 */
-	ByteBuffer rbuf = ByteBuffer.wrap(new byte[1472]);
+	static ByteBuffer rbuf = ByteBuffer.wrap(new byte[1472]);
 	
 	/**
 	 * Register with the selector
 	 * @param selector selector to register with
 	 * @return 
 	 */
-	public SelectionKey registerChannel(Selector selector) {
+	public static SelectionKey registerChannel(Selector selector) {
 		try {
 			socket.configureBlocking(false);
 			return socket.register(selector, SelectionKey.OP_READ);
@@ -53,7 +54,7 @@ public class MessagingContext {
 	 * @param msg message to send
 	 * @throws IOException
 	 */
-	public void send(Message msg) throws IOException {
+	public static void send(Message msg) throws IOException {
 		if (msg.bbuf == null) {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(bos);
@@ -62,18 +63,23 @@ public class MessagingContext {
 			msg.bbuf = ByteBuffer.wrap(bos.toByteArray());
 		}
 		msg.bbuf.mark();
-		socket.send(msg.bbuf, socket.socket().getLocalSocketAddress());
+		socket.send(msg.bbuf, MessagingContext.getSocketAddr(msg.getDestination()));
 		msg.bbuf.reset();
 		log.fine("Sending to "+socket.socket().getLocalSocketAddress()+": msg="+msg);
 	}
 	
+	private static SocketAddress getSocketAddr(URI destination) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * Gets the next incoming message
 	 * @param skey Selection key
 	 * @return Next incoming message
 	 * @throws IOException
 	 */
-	public Message receive(SelectionKey skey) throws IOException {
+	public static Message receive(SelectionKey skey) throws IOException {
 		try {
 			synchronized(rbuf) {
 				socket.receive(rbuf);
@@ -97,7 +103,7 @@ public class MessagingContext {
 	 * @param payload message data
 	 * @return new Message object
 	 */
-	public Message createMessage(URI source,URI destination,Object payload) {
+	public static Message createMessage(URI source,URI destination,Object payload) {
 		return new Message(source,destination,payload);
 		
 	}
@@ -109,7 +115,7 @@ public class MessagingContext {
 	 * @param payload Payload for reply
 	 * @return new reply message
 	 */
-	public Message createReply(Message msg, Object payload) {
+	public static Message createReply(Message msg, Object payload) {
 		Message rmsg = new Message(msg.getDestination(),msg.getSource(),payload);
 		rmsg.id = msg.id;
 		return rmsg;
@@ -122,7 +128,7 @@ public class MessagingContext {
 	 * @param payload Payload for message
 	 * @return modified messge
 	 */
-	public Message setMessage(Message msg,Object payload) {
+	public static Message setMessage(Message msg,Object payload) {
 		msg.payload = payload;
 		msg.bbuf = null;
 		return msg;
@@ -132,7 +138,7 @@ public class MessagingContext {
 	 * Close the messaging interface
 	 *
 	 */
-	public void close() {
+	public static void close() {
 		try {
 			socket.close();
 		}catch (IOException e) {

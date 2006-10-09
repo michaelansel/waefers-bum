@@ -26,22 +26,22 @@ public class Message implements java.io.Serializable {
 	/**
 	 * Possible message types
 	 */
-	private enum Type {REGISTER,GETHASH,GETLOCATION,GETDATA};
+	public enum MessageType {REGISTER,GETHASHES,GETLOCATIONS,GETDATA,FORWARD,ROUTE};
 	
 	/**
 	 * Message type
 	 */
-	public Type type;
+	public MessageType type;
 	
 	/**
 	 * Possible response types
 	 */
-	private enum Response {SUCCESS,ERROR};
+	public enum ResponseType {SUCCESS,ERROR};
 	
 	/**
 	 * Message response type
 	 */
-	public Response response;
+	public ResponseType response;
 	
 	/**
 	 * Message ID
@@ -60,12 +60,12 @@ public class Message implements java.io.Serializable {
 	 */
 	transient ByteBuffer bbuf;
 		
-	Message(URI source,URI destination,Object payload) {
+	public Message(URI source,URI destination,Object payload) {
 		this.srcURI = source;
 		this.dstURI = destination;
 		this.payload = payload;
 		this.id = last_id++;
-		this.type = Type.REGISTER;
+		this.type = MessageType.REGISTER;
 	}
 	
 	public URI getSource() {
@@ -80,12 +80,12 @@ public class Message implements java.io.Serializable {
 		return (payload != null);
 	}
 	
-	Object getPayload() {
+	public Object getPayload() {
 		return payload;
 	}
 	
 	public boolean isError() {
-		return (response == Response.ERROR);
+		return (response == ResponseType.ERROR);
 	}
 	
 	public int hashCode() {

@@ -1,0 +1,16 @@
+Oct 9, 2006 6:41:34 AM net.waefers.master.MasterServer run
+FINEST: Master server run method starting
+Oct 9, 2006 6:41:38 AM net.waefers.master.MasterServer run
+FINER: RECEIVED: addr=/127.0.0.1:1472 size=674 msg={type=REGISTER response=null src=test@testing dst=filemaster@waefer id=1343011288 payload={type=PEER uri=test@testing #ofblocks=
+}}
+Oct 9, 2006 6:41:38 AM net.waefers.master.MasterServer run
+FINE: test@testing registered as /127.0.0.1:1472
+Oct 9, 2006 6:41:49 AM net.waefers.master.MasterServer run
+FINER: RECEIVED: addr=/127.0.0.1:1472 size=674 msg={type=REGISTER response=null src=test@testing dst=filemaster@waefer id=1343011288 payload={type=PEER uri=test@testing #ofblocks=
+}}
+Oct 9, 2006 6:41:49 AM MasterServer run
+FINER: THROW
+java.lang.NullPointerException
+	at net.waefers.master.MasterServer.run(MasterServer.java:153)
+Oct 9, 2006 6:41:49 AM net.waefers.master.MasterServer run
+FINEST: Master server run method ending
