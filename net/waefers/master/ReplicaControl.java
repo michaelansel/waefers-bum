@@ -13,9 +13,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
 
-import net.waefers.Message;
-import net.waefers.MessagingContext;
-import net.waefers.Node;
+import net.waefers.messaging.Message;
+import net.waefers.messaging.MessageControl;
+import net.waefers.node.Node;
 
 public class ReplicaControl {
 	
@@ -32,7 +32,7 @@ public class ReplicaControl {
 	public static void sendToReplicas(ReplicaMessage msg) throws URISyntaxException, IOException {
 		for(Node replica : replicaList) {
 			Message msg1 = new Message(new URI("replicacontrol@waefer"),replica.uri,msg);
-			MessagingContext.send(msg1);
+			MessageControl.send(msg1);
 		}
 	}
 
