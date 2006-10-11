@@ -17,9 +17,9 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import net.waefers.GlobalControl;
-import net.waefers.Message;
-import net.waefers.MessagingContext;
-import net.waefers.Node;
+import net.waefers.messaging.Message;
+import net.waefers.messaging.MessageControl;
+import net.waefers.node.Node;
 
 /**
  * 
@@ -59,7 +59,7 @@ public class TestClient extends Thread{
 		Node node = new Node();
 		node.uri = new URI("test@testing");
 		node.type = Node.NodeType.PEER;
-		Message msg = MessagingContext.createMessage(node.uri, new URI("filemaster@waefer"), node);
+		Message msg = MessageControl.createMessage(node.uri, new URI("filemaster@waefer"), node);
 		
 		
 		if((s=argList.remove(0)).indexOf(":")>0) {
