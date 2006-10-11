@@ -2,7 +2,7 @@ package net.waefers.directory;
 
 import java.util.Date;
 
-import net.waefers.Node;
+import net.waefers.node.Node;
 
 /**
  * 
