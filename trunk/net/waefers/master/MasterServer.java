@@ -20,15 +20,15 @@ import java.util.LinkedList;
 import java.util.TreeMap;
 
 import net.waefers.GlobalControl;
-import net.waefers.Message;
-import net.waefers.MessagingContext;
-import net.waefers.Node;
 import net.waefers.directory.DirectoryCleaner;
 import net.waefers.directory.NodeEntry;
 import net.waefers.filesystem.FileSystemObject;
+import net.waefers.messaging.Message;
+import net.waefers.messaging.MessageControl;
+import net.waefers.node.Node;
 import static net.waefers.GlobalControl.log;
-import static net.waefers.Message.ResponseType.*;
 import static net.waefers.master.ReplicaControl.replicaList;
+import static net.waefers.messaging.Message.ResponseType.*;
 
 /**
  * 
@@ -76,6 +76,7 @@ public class MasterServer extends Thread{
 		nodeExpiry = new TreeMap<Date,NodeEntry>();
 		replicaList = new LinkedList<Node>();
 		new DirectoryCleaner(nodeExpiry).start();
+		MessageControl.init();
 	}
 	
 	
@@ -84,82 +85,51 @@ public class MasterServer extends Thread{
 	 */
 	public void run() {
 		log.finest("Master server run method starting");
-		
-		SocketAddress addr;
-		DatagramPacket pkt = new DatagramPacket(new byte[1472],1472);
-		ByteArrayOutputStream bos;
-		ObjectOutputStream oos;
-		NodeEntry src,dst;
-		Message msg = null;
-		
-		try {
-			bos = new ByteArrayOutputStream(1472);
-			bos.reset();
-		} catch(Exception e) {
-			e.printStackTrace();
-			return;
-		}
-		
-		try {
-			while(true) {
-				server.receive(pkt);
-				if(pkt.getLength() == 0) continue;
-				
-				/* Convert packet back into a Message */
-				try {
-					ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(pkt.getData()));
-					msg = (Message) ois.readObject();
-				} catch(Exception e) {
-					log.throwing("MasterServer","run",e);
-					continue;
-				}
-				
-				addr = pkt.getSocketAddress();
-				
-			log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", addr, pkt.getLength(), msg));
-		
-				switch(msg.type) {
-				case REGISTER:
-					src = nodeDirectory.get(msg.getSource());
-					
-					if(src == null || src.expires.before(new Date())) {
-						NodeEntry ne = new NodeEntry((Node)msg.getPayload());
-						nodeDirectory.put(((Node)msg.getPayload()).uri,ne);
-						ne.updateExpiryTime();
-						nodeExpiry.put(ne.expires,ne);
-						log.fine(msg.getSource() + " registered as " + pkt.getSocketAddress());
-						msg = MessagingContext.createReply(msg,replicaList);
-						msg.response = SUCCESS;
-					} else if(src.node.address.equals(pkt.getAddress())) { //If IP address is equal
-						src.updateExpiryTime();
-						if(!src.node.address.equals(pkt.getSocketAddress())) //If IP:port is not equal
-							log.fine(msg.getSource() + " is now " + pkt.getSocketAddress());
 
-						msg = MessagingContext.createReply(msg,replicaList);
-						msg.response = SUCCESS;
-					} else {
-						msg = MessagingContext.createReply(msg,replicaList);
-						msg.response = ERROR;
-					}
-					
-					break;
-				case GETHASHES:
-					break;
-				case GETLOCATIONS:
-					break;
-				case GETDATA:
-					break;
-				default:
-					break;
+		while(true) {
+			Message msg = MessageControl.receive();
+			NodeEntry src;
+
+			if(msg == null) continue;
+			
+			switch(msg.type) {
+			case HEARTBEAT:
+				src = nodeDirectory.get(msg.getSource());
+				
+				if(src == null || src.expires.before(new Date())) {
+					NodeEntry ne = new NodeEntry((Node)msg.getPayload());
+					nodeDirectory.put(((Node)msg.getPayload()).uri,ne);
+					ne.updateExpiryTime();
+					nodeExpiry.put(ne.expires,ne);
+					log.fine(msg.getSource() + " registered as " + msg.srcAddr);
+					msg = MessageControl.createReply(msg,replicaList);
+					msg.response = SUCCESS;
+				} else if(src.node.address.equals(msg.srcAddr)) { //If IP address is equal
+					src.updateExpiryTime();
+					if(!src.node.address.equals(msg.srcAddr)) //If IP:port is not equal
+						log.fine(msg.getSource() + " is now " + msg.srcAddr);
+	
+					msg = MessageControl.createReply(msg,replicaList);
+					msg.response = SUCCESS;
+				} else {
+					msg = MessageControl.createReply(msg,replicaList);
+					msg.response = ERROR;
 				}
+				
+				break;
+			case BLOCK: //Packet concerning actual blocks
+				break;
+			case METADATA: //Packet concerning file system information
+				break;
+			case LOCATION: //Packet concerning block replica locations
+				break;
+			default:
+				break;
 			}
-		} catch(Exception e) {
-			log.throwing("MasterServer", "run", e);
-		} finally {
-			try { server.close(); } catch(Exception e) { }
+			
 		}
 		
-		log.finest("Master server run method ending");
+		//log.finest("Master server run method ending");
 	}
 
 	/**
