@@ -114,6 +114,17 @@ public class Message implements java.io.Serializable {
 		return payload;
 	}
 	
+	public void killPayload() {
+		payload = null;
+	}
+	
+	//TODO: Does this kill the payload on the original message?
+	public Message noPayload() {
+		Message msg = this;
+		msg.killPayload();
+		return msg;
+	}
+	
 	public boolean isError() {
 		return (response == Response.ERROR);
 	}

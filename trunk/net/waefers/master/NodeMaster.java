@@ -22,6 +22,8 @@ import net.waefers.node.Node;
 
 public class NodeMaster extends MasterServer {
 
+//Specific variable for this Server
+	
 	/**
 	 * Directory of all up-to-date peers
 	 */
@@ -33,7 +35,7 @@ public class NodeMaster extends MasterServer {
 	private TreeMap<Date,NodeEntry> nodeExpiry = null;
 	
 	
-	//Constructors
+//Constructors
 	
 	public NodeMaster(SocketAddress addr) throws SocketException {
 		super(addr);
@@ -53,13 +55,15 @@ public class NodeMaster extends MasterServer {
 	public NodeMaster() throws SocketException {
 		this(new InetSocketAddress(DEFAULT_PORT));
 	}
+
+//Methods specific to this Server	
 	
 	/**
 	 * Process heartbeat message and add/update node in the directory
 	 * @param msg
 	 * @return
 	 */
-	private Message heartbeat(Message msg) {
+	protected Message heartbeat(Message msg) {
 		Message rmsg;
 		NodeEntry src;
 		src = nodeDirectory.get(msg.getSource());
@@ -81,6 +85,10 @@ public class NodeMaster extends MasterServer {
 			rmsg = MessageControl.createReply(msg,ERROR,replicaList);
 		}
 		return rmsg;
+	}
+	
+	public static void begin() throws SocketException {
+		new NodeMaster().run();
 	}
 
 }

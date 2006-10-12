@@ -18,6 +18,8 @@ import java.nio.channels.Selector;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import net.waefers.messaging.Message.Response;
 import net.waefers.node.NodeControl;
@@ -53,6 +55,11 @@ public class MessageControl {
 	 * List of incoming messages
 	 */
 	static LinkedList<Integer> queueList = new LinkedList<Integer>();
+	
+	/**
+	 * Array of all messages received sans payload indexed by ID
+	 */
+	static HashMap<Integer,Message> msgLog = new HashMap<Integer,Message>();
 	
 	/**
 	 * Selector and selectionKey
@@ -113,7 +120,7 @@ public class MessageControl {
 	 * Send a message with verification (returns reply)
 	 * @param msg message to send
 	 * @param verify whether or not to guarantee reply
-	 * @return Message verification message received
+	 * @return Message verification message received or null if verify=false
 	 * @throws IOException
 	 */
 	public static Message send(Message msg,boolean verify) {
@@ -127,17 +134,36 @@ public class MessageControl {
 			msg.bbuf.mark();
 			Message rmsg = null;
 			while(rmsg == null) {
-				server.send(msg.bbuf, NodeControl.getSocketAddress(msg.getDestination()));
-				msg.bbuf.reset();
-				log.fine("Sending to "+server.socket().getLocalSocketAddress()+": msg="+msg);
+				Timer timer = new Timer();
+				timer.schedule(new SendTimerTask(msg), 0, 10*1000);
 				if(!verify) break;
-				rmsg = receive(); //Due to recursiveness of receive method, has possibility of never returning. Need a way to prevent this and a) kill request; and b) resend message then retry receive
-				Thread.sleep( (long) 10*1000 );
+				rmsg = receive(msg.id,true); //Check for instantaneous response
+				Thread.sleep( (long) 1000 ); //Give message time to go back and forth
+				rmsg = receive(msg.id,true); //Due to recursiveness of receive method, has possibility of never returning. Need a way to prevent this and a) kill request; and b) resend message then retry receive
 			}
 			return rmsg;
 		} catch (Exception e) {
 			log.throwing("MessageControl", "send", e);
 			return null;
+		}
+	}
+	
+	static class SendTimerTask extends TimerTask {
+		
+		Message msg;
+		
+		SendTimerTask(Message msg) {
+			this.msg = msg;
+		}
+		
+		public void run() {
+			try {
+				server.send(msg.bbuf, NodeControl.getSocketAddress(msg.getDestination()));
+				msg.bbuf.reset();
+				log.fine("Sending to "+server.socket().getLocalSocketAddress()+": msg="+msg);
+			} catch(IOException e) {
+				log.throwing("MessageControl", "SendTimerTask.run", e);
+			}
 		}
 	}
 
@@ -148,8 +174,16 @@ public class MessageControl {
 	 * @throws IOException
 	 */
 	public static Message receive() {
-		if(!queue.isEmpty()) return queue.remove(queueList.removeFirst());
+		if(!queue.isEmpty()) {
+			Message msg = queue.remove(queueList.removeFirst());
+			msgLog.put(msg.id,msg.noPayload()); //msg.noPayload() might kill the payload on the original message
+			return msg;
+		}
 		return receive(0,false);
+	}
+	
+	public static Message receive(int id) {
+		return receive(id,true);
 	}
 	
 	public static Message receive(int id,boolean checkID) {
@@ -172,16 +206,22 @@ public class MessageControl {
 				
 				log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", pkt.getSocketAddress(), pkt.getLength(), msg));
 				
-				if(!checkID) return msg;
-				if(msg.id==id) return msg;
+				if(!checkID) {
+					msgLog.put(msg.id,msg.noPayload());
+					return msg;
+				}
+				if(msg.id==id) {
+					msgLog.put(msg.id,msg.noPayload());
+					return msg;
+				}
 				queue.put(msg.id, msg);
 				queueList.addLast(msg.id);
-				return receive(id,checkID);
 			}
 		} catch(Exception e) {
 			log.throwing("MasterServer", "run", e);
 			return null;
 		}
+		return receive(id,checkID);
 	}
 	
 	/**

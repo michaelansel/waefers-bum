@@ -1,3 +1,4 @@
+//TODO:Shift to {Replica,Block}Message and kill
 package net.waefers.master;
 
 import java.net.URI;
