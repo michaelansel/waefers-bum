@@ -1,9 +1,6 @@
 package net.waefers.messaging;
 
 import static net.waefers.GlobalControl.log;
-import static net.waefers.master.ReplicaControl.replicaList;
-import static net.waefers.messaging.Message.ResponseType.ERROR;
-import static net.waefers.messaging.Message.ResponseType.SUCCESS;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -11,17 +8,20 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
+import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
-import java.util.Date;
 
-import net.waefers.directory.NodeEntry;
-import net.waefers.node.Node;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+import net.waefers.messaging.Message.Response;
 import net.waefers.node.NodeControl;
+import static net.waefers.GlobalControl.DEFAULT_PORT;
 
 
 
@@ -45,6 +45,16 @@ public class MessageControl {
 	static ByteBuffer rbuf = ByteBuffer.wrap(new byte[1472]);
 	
 	/**
+	 * Incoming message queue
+	 */
+	static HashMap<Integer,Message> queue = new HashMap<Integer,Message>();
+	
+	/**
+	 * List of incoming messages
+	 */
+	static LinkedList<Integer> queueList = new LinkedList<Integer>();
+	
+	/**
 	 * Selector and selectionKey
 	 */
 	static Selector selector;
@@ -52,18 +62,19 @@ public class MessageControl {
 	
 	static ByteArrayOutputStream bos;
 	static ObjectOutputStream oos;
-	static ByteBuffer bbuff;
 	
 	/**
 	 * Register with the selector
 	 * @param selector selector to register with
 	 * @return 
 	 */
-	public static boolean init() {
+	public static boolean init(SocketAddress addr) {
 		try {
 			server.configureBlocking(false);
 			key = server.register(selector, SelectionKey.OP_READ);
-			open();
+			DatagramChannel.open();
+			server.socket().bind(addr);
+			bos = new ByteArrayOutputStream(1472);
 			
 			
 			return true;
@@ -73,23 +84,61 @@ public class MessageControl {
 		}
 	}
 	
+	public static boolean init(int port) {
+		return init(new InetSocketAddress(port));
+	}
+	
+	public static boolean init(String hostname, int port) {
+		return init(new InetSocketAddress(hostname,port));
+	}
+	
+	public static boolean init(String hostname) {
+		return init(new InetSocketAddress(hostname,DEFAULT_PORT));
+	}
+	
+	public static boolean init() {
+		return init(new InetSocketAddress(DEFAULT_PORT));
+	}
+	
 	/**
-	 * Send a message
+	 * Send a message, no verification
 	 * @param msg message to send
 	 * @throws IOException
 	 */
-	public static void send(Message msg) throws IOException {
-		if (msg.bbuf == null) {
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(bos);
-			oos.writeObject(msg);
-			oos.close();
-			msg.bbuf = ByteBuffer.wrap(bos.toByteArray());
+	public static void send(Message msg) {
+		send(msg,false);
+	}
+	
+	/**
+	 * Send a message with verification (returns reply)
+	 * @param msg message to send
+	 * @param verify whether or not to guarantee reply
+	 * @return Message verification message received
+	 * @throws IOException
+	 */
+	public static Message send(Message msg,boolean verify) {
+		try {
+			if (msg.bbuf == null) {
+				ObjectOutputStream oos = new ObjectOutputStream(bos);
+				oos.writeObject(msg);
+				oos.close();
+				msg.bbuf = ByteBuffer.wrap(bos.toByteArray());
+			}
+			msg.bbuf.mark();
+			Message rmsg = null;
+			while(rmsg == null) {
+				server.send(msg.bbuf, NodeControl.getSocketAddress(msg.getDestination()));
+				msg.bbuf.reset();
+				log.fine("Sending to "+server.socket().getLocalSocketAddress()+": msg="+msg);
+				if(!verify) break;
+				rmsg = receive(); //Due to recursiveness of receive method, has possibility of never returning. Need a way to prevent this and a) kill request; and b) resend message then retry receive
+				Thread.sleep( (long) 10*1000 );
+			}
+			return rmsg;
+		} catch (Exception e) {
+			log.throwing("MessageControl", "send", e);
+			return null;
 		}
-		msg.bbuf.mark();
-		server.send(msg.bbuf, NodeControl.getSocketAddress(msg.getDestination()));
-		msg.bbuf.reset();
-		log.fine("Sending to "+server.socket().getLocalSocketAddress()+": msg="+msg);
 	}
 
 	/**
@@ -99,33 +148,35 @@ public class MessageControl {
 	 * @throws IOException
 	 */
 	public static Message receive() {
+		if(!queue.isEmpty()) return queue.remove(queueList.removeFirst());
+		return receive(0,false);
+	}
+	
+	public static Message receive(int id,boolean checkID) {
 		Message msg = null;
-		
 		try {
-			bos = new ByteArrayOutputStream(1472);
-			bos.reset();
-		} catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		
-		try {
-			synchronized(bbuff) {
-				server.receive(bbuff);
-				bbuff.flip();
-				DatagramPacket pkt = new DatagramPacket(bbuff.array(),bbuff.limit());
+			synchronized(rbuf) {
+				server.receive(rbuf);
+				rbuf.flip();
+				DatagramPacket pkt = new DatagramPacket(rbuf.array(),rbuf.limit());
 				if(pkt.getLength() == 0) return null;
 				
 				/* Convert packet back into a Message */
 				ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(pkt.getData()));
 				msg = (Message) ois.readObject();
 				
+				if(msg.id==0) return null;
+				
 				msg.srcAddr = pkt.getSocketAddress();
 				msg.dstAddr = server.socket().getLocalSocketAddress();
 				
 				log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", pkt.getSocketAddress(), pkt.getLength(), msg));
 				
-				return msg;
+				if(!checkID) return msg;
+				if(msg.id==id) return msg;
+				queue.put(msg.id, msg);
+				queueList.addLast(msg.id);
+				return receive(id,checkID);
 			}
 		} catch(Exception e) {
 			log.throwing("MasterServer", "run", e);
@@ -152,9 +203,10 @@ public class MessageControl {
 	 * @param payload Payload for reply
 	 * @return new reply message
 	 */
-	public static Message createReply(Message msg, Object payload) {
+	public static Message createReply(Message msg, Response response, Object payload) {
 		Message rmsg = new Message(msg.getDestination(),msg.getSource(),payload);
 		rmsg.id = msg.id;
+		rmsg.response = response;
 		return rmsg;
 	}
 	

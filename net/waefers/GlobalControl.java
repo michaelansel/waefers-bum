@@ -9,6 +9,11 @@ import java.util.logging.SimpleFormatter;
 public class GlobalControl {
 	
 	/**
+	 * Default port for all communications
+	 */
+	public static final int DEFAULT_PORT = 51951;
+	
+	/**
 	 * Main logging object
 	 */
 	public static final Logger log = Logger.getLogger("global");
