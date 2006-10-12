@@ -28,7 +28,7 @@ import static net.waefers.GlobalControl.DEFAULT_PORT;
  * @author Michael Ansel
  *
  */
-public class MasterServer extends Thread{
+public class MasterServer extends Thread {
 		
 	DatagramSocket server;
 	
@@ -38,17 +38,6 @@ public class MasterServer extends Thread{
 	 */
 	private HashMap<String,FileSystemObject> fileDirectory = null;
 	
-	/**
-	 * Contains block->URI mapping
-	 * HashMap<blockID,URI>
-	 * 
-	 * Move to replica server
-	 */
-	private HashMap<Integer,HashSet<URI>> blockDirectory = null;
-	
-
-	
-
 	/**
 	 * Initialize listening socket and directories
 	 * @throws SocketException
@@ -60,19 +49,15 @@ public class MasterServer extends Thread{
 		//replicaList = new LinkedList<Node>();
 		MessageControl.init();
 	}
-	
 	public MasterServer(int port) throws SocketException {
 		this(new InetSocketAddress(port));
 	}
-	
 	public MasterServer(String hostname,int port) throws SocketException {
 		this(new InetSocketAddress(hostname,port));
 	}
-	
 	public MasterServer(String hostname) throws SocketException {
 		this(new InetSocketAddress(hostname,DEFAULT_PORT));
 	}
-	
 	public MasterServer() throws SocketException {
 		this(new InetSocketAddress(DEFAULT_PORT));
 	}
@@ -114,22 +99,26 @@ public class MasterServer extends Thread{
 		//log.finest("Master server run method ending");
 	}
 	
-	private Message heartbeat(Message msg) {
+	protected Message heartbeat(Message msg) {
 		return MessageControl.createReply(msg,ERROR,null);
 	}
 	
-	private Message block(Message msg) {
+	protected Message block(Message msg) {
 		return MessageControl.createReply(msg,ERROR,null);
 	}
 	
-	private Message meta(Message msg) {
+	protected Message meta(Message msg) {
 		return MessageControl.createReply(msg,ERROR,null);
 	}
 	
-	private Message location(Message msg) {
+	protected Message location(Message msg) {
 		return MessageControl.createReply(msg,ERROR,null);
 	}
-
+	
+	public static void begin() throws SocketException {
+		new MasterServer().run();
+	}
+	
 	/**
 	 * Start a MasterServer
 	 * @param args [-d filename.log] <Replica URI:hostname:port> <ReplicaURI:hostname:port>...
@@ -145,19 +134,8 @@ public class MasterServer extends Thread{
 			argList.remove(0);
 			argList.remove(0);
 		}
-
-		new MasterServer().start();
 		
-		Iterator stepper = argList.iterator();
-		while(stepper.hasNext()) {
-			String uri,host,port,next;
-			next = (String) stepper.next();
-			uri = next.substring(0,next.indexOf(":"));
-			host = next.substring(next.indexOf(":"),next.lastIndexOf(":"));
-			port = next.substring(next.indexOf(":"),next.length());
-			new ReplicaServer(uri,host,port).start();
-		}
-		
+		begin();
 	}
 
 }

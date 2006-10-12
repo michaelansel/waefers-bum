@@ -86,7 +86,7 @@ public class TestClient extends Thread{
 		while(true) {
 			server.send(new DatagramPacket(bos.toByteArray(), bos.size(), addr));
 			log.finer(String.format("SENT: addr=%s size=%d msg=%s", addr, bos.size(), msg));
-			Thread.currentThread().sleep( (long) 10*1000 );
+			Thread.sleep( (long) 10*1000 );
 		}
 		
 		

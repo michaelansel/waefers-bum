@@ -2,7 +2,6 @@ package net.waefers.node;
 
 import java.net.InetSocketAddress;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
