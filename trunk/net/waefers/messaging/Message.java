@@ -40,22 +40,22 @@ public class Message implements java.io.Serializable {
 	 * METADATA - Get/Put information concerning the file system
 	 * LOCATION - (Master Only) Get node to request block from
 	 */
-	public enum MessageType {HEARTBEAT,BLOCK,METADATA,LOCATION};
+	public enum Type {HEARTBEAT,BLOCK,METADATA,LOCATION};
 	
 	/**
 	 * Message type
 	 */
-	public MessageType type;
+	public Type type;
 	
 	/**
 	 * Possible response types
 	 */
-	public enum ResponseType {SUCCESS,ERROR};
+	public enum Response {SUCCESS,ERROR};
 	
 	/**
 	 * Message response type
 	 */
-	public ResponseType response;
+	public Response response;
 	
 	/**
 	 * Message ID
@@ -79,7 +79,7 @@ public class Message implements java.io.Serializable {
 		this.destination = destination;
 		this.payload = payload;
 		this.id = last_id++;
-		this.type = MessageType.HEARTBEAT;
+		this.type = Type.HEARTBEAT;
 	}
 	
 	public Message(URI source,URI destination,Object payload) {
@@ -87,7 +87,7 @@ public class Message implements java.io.Serializable {
 		this.destination.uri = destination;
 		this.payload = payload;
 		this.id = last_id++;
-		this.type = MessageType.HEARTBEAT;
+		this.type = Type.HEARTBEAT;
 	}
 	
 	public Message(URI source,URI destination) {
@@ -115,7 +115,7 @@ public class Message implements java.io.Serializable {
 	}
 	
 	public boolean isError() {
-		return (response == ResponseType.ERROR);
+		return (response == Response.ERROR);
 	}
 	
 	public int hashCode() {
