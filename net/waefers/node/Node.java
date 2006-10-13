@@ -16,7 +16,7 @@ public class Node implements java.io.Serializable {
 	static final long serialVersionUID = 0;
 
 	/**
-	 * Node URI
+	 * Unique node identifier
 	 */
 	public URI uri;
 	
@@ -42,6 +42,10 @@ public class Node implements java.io.Serializable {
 	
 	public boolean isPeer() {
 		return type == NodeType.PEER;
+	}
+	
+	public int hashCode() {
+		return uri.hashCode() ^ dataStored.hashCode();
 	}
 	
 	public String toString() {

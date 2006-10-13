@@ -13,7 +13,9 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import net.waefers.block.Block;
 import net.waefers.directory.DirectoryCleaner;
+import net.waefers.messaging.LocationMessage;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
 import net.waefers.node.Node;
@@ -23,17 +25,22 @@ public class ReplicaMaster extends MasterServer {
 //Specific variable for this Server
 	
 	/**
-	 * Contains block->URI mapping
-	 * HashMap<blockID,URI>
+	 * Contains block->Node mapping
+	 * HashMap<blockID,Node>
 	 */
-	private HashMap<Integer,HashSet<URI>> blockDirectory;
+	private HashMap<Integer,HashSet<Node>> blockLocs;
+	
+	/**
+	 * Current nodes registered on the NodeMaster
+	 */
+	private HashSet<Node> curNodes;
 	
 	
 //Constructors
 	
 	public ReplicaMaster(SocketAddress addr) throws SocketException {
 		super(addr);
-		blockDirectory = new HashMap<Integer,HashSet<URI>>();
+		blockLocs = new HashMap<Integer,HashSet<Node>>();
 	}
 	public ReplicaMaster(int port) throws SocketException {
 		this(new InetSocketAddress(port));
@@ -57,9 +64,20 @@ public class ReplicaMaster extends MasterServer {
 	 */
 	protected Message location(Message msg) {
 		Message rmsg;
-
-		rmsg=null;
+		LocationMessage lMsg = (LocationMessage) msg.getPayload();
 		
+		switch(lMsg.action) {
+		case ADD:
+			for( Block block : (Block[]) lMsg.blocks.toArray() ) {
+				if( blockLocs.containsKey(block) ) {
+					blockLocs.get(block).add(lMsg.node);
+				} else {
+					blockLocs.put(block, (new HashSet<Node>).);
+				}
+			}
+		}
+		
+		rmsg=null;
 		return rmsg;
 	}
 	
