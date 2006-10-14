@@ -35,7 +35,14 @@ public class Block {
 	/**
 	 * Data hash (id)
 	 */
-	public int id;
+	public String id;
+	
+	
+	public Block() {
+		type = BlockType.REFERENCE;
+		id = "";
+		data = null;
+	}
 	
 	/**
 	 * 

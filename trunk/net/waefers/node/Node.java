@@ -33,7 +33,7 @@ public class Node implements java.io.Serializable {
 	/**
 	 * ArrayList of data stored on peer
 	 */
-	public HashSet<Integer> dataStored = new HashSet<Integer>();
+	public HashSet<String> dataStored = new HashSet<String>();
 	
 	/**
 	 * Node external InetSocketAddress
@@ -49,7 +49,7 @@ public class Node implements java.io.Serializable {
 	}
 	
 	public String toString() {
-		return String.format("{type=%s uri=%s #ofblocks=%n}",
+		return String.format("{type=%s uri=%s #ofblocks=%s}",
 				type, uri, dataStored.size());
 	}
 

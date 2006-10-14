@@ -5,6 +5,7 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 
 import net.waefers.node.Node;
+import static net.waefers.GlobalControl.log;
 
 /**
  * 
@@ -19,7 +20,8 @@ public class Message implements java.io.Serializable {
 	/**
 	 * Source and Destination URIs for the message
 	 */
-	private Node source,destination;
+	private Node source = new Node();
+	private Node destination = new Node();
 	
 	/**
 	 * Source and Destination SocketAddresses
@@ -83,6 +85,7 @@ public class Message implements java.io.Serializable {
 	}
 	
 	public Message(URI source,URI destination,Object payload) {
+		log.finest("new message source uri:"+source.toString());
 		this.source.uri = source;
 		this.destination.uri = destination;
 		this.payload = payload;

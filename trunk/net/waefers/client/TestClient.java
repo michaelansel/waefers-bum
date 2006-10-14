@@ -14,9 +14,11 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 
 import net.waefers.GlobalControl;
+import net.waefers.block.Block;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
 import net.waefers.node.Node;
@@ -37,7 +39,8 @@ public class TestClient extends Thread{
 	 * @throws URISyntaxException 
 	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
+	public static void main(String[] args) {
+		try {
 		ArrayList<String> argList = new ArrayList<String>();
 		for (String arg : args) {
 			log.finer("argument:"+arg);
@@ -57,8 +60,19 @@ public class TestClient extends Thread{
 		ByteArrayOutputStream bos;
 		ObjectOutputStream oos;
 		Node node = new Node();
-		node.uri = new URI("test@testing");
+		node.uri = new URI("nodemaster@waefers");
+		log.finest("Local node uri:"+node.uri.toString());
 		node.type = Node.NodeType.PEER;
+		Block b = new Block();
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA");
+			md.update(new String("Test string!").getBytes());
+			b.id = md.digest().toString();
+			log.finest(String.valueOf(b.id));
+		} catch (Exception e) {
+			log.throwing("TestClient", "main", e);
+		}
+		node.dataStored.add(b.id);
 		Message msg = MessageControl.createMessage(node.uri, new URI("filemaster@waefer"), node);
 		
 		
@@ -89,7 +103,9 @@ public class TestClient extends Thread{
 			Thread.sleep( (long) 10*1000 );
 		}
 		
-		
+		} catch(Exception e) {
+			log.throwing("TestClient", "main", e);
+		}
 	}
 	
 }

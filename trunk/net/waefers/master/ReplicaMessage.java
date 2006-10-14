@@ -8,12 +8,12 @@ public class ReplicaMessage {
 	public enum RMessageType {ADD,REMOVE};
 	public RMessageType rMessageType;
 	
-	public int block;
+	public String block;
 	public URI uri;
 	
-	public ReplicaMessage(RMessageType type,int block, URI uri) {
+	public ReplicaMessage(RMessageType type,String block2, URI uri) {
 		this.rMessageType = type;
-		this.block = block;
+		this.block = block2;
 		this.uri = uri;
 	}
 }

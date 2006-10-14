@@ -15,6 +15,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
+import java.nio.channels.spi.SelectorProvider;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -39,7 +40,7 @@ public class MessageControl {
 	/**
 	 * DatagramChannel to be used for message communications
 	 */
-	static DatagramChannel server;
+	static DatagramChannel server = null;
 	
 	/**
 	 * Receive buffer
@@ -67,8 +68,8 @@ public class MessageControl {
 	static Selector selector;
 	static SelectionKey key;
 	
-	static ByteArrayOutputStream bos;
-	static ObjectOutputStream oos;
+	static ByteArrayOutputStream bos = null;
+	static ObjectOutputStream oos = null;
 	
 	/**
 	 * Register with the selector
@@ -77,16 +78,17 @@ public class MessageControl {
 	 */
 	public static boolean init(SocketAddress addr) {
 		try {
+			server = DatagramChannel.open();
+			selector = Selector.open();
 			server.configureBlocking(false);
 			key = server.register(selector, SelectionKey.OP_READ);
-			DatagramChannel.open();
 			server.socket().bind(addr);
 			bos = new ByteArrayOutputStream(1472);
 			
 			
 			return true;
 		}catch(Exception e) {
-			log.throwing("MessagingContext","registerChannel",e);
+			log.throwing("MessageControl","registerChannel",e);
 			return false;
 		}
 	}
@@ -187,13 +189,23 @@ public class MessageControl {
 	}
 	
 	public static Message receive(int id,boolean checkID) {
+		try {
+			Thread.sleep( (long) 10 );
+		} catch(Exception e) {
+			log.throwing("MessageControl", "receive", e);
+		}
 		Message msg = null;
 		try {
 			synchronized(rbuf) {
-				server.receive(rbuf);
+				if(server.receive(rbuf) == null) return null;
 				rbuf.flip();
 				DatagramPacket pkt = new DatagramPacket(rbuf.array(),rbuf.limit());
-				if(pkt.getLength() == 0) return null;
+				if(pkt.getLength() == 0) {
+					log.finest("Null packet");
+					return null;
+				}
+				
+				log.finest("Good packet");
 				
 				/* Convert packet back into a Message */
 				ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(pkt.getData()));
@@ -264,19 +276,6 @@ public class MessageControl {
 	}
 	
 	/**
-	 * Open the messaging interface
-	 *
-	 */
-	public static void open() {
-		try {
-			DatagramChannel.open();
-		}catch (IOException e) {
-			log.throwing("MessagingContext", "open", e);
-		}
-		
-	}
-	
-	/**
 	 * Close the messaging interface
 	 *
 	 */
@@ -284,7 +283,7 @@ public class MessageControl {
 		try {
 			server.close();
 		}catch (IOException e) {
-			log.throwing("MessagingContext", "close", e);
+			log.throwing("MessageControl", "close", e);
 		}
 		
 	}
