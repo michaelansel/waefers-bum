@@ -1,0 +1,22 @@
+Oct 14, 2006 5:21:53 PM net.waefers.client.TestClient main
+FINEST: Local node uri:nodemaster@waefers
+Oct 14, 2006 5:21:53 PM net.waefers.client.TestClient main
+FINEST: [B@f4f44a
+Oct 14, 2006 5:21:53 PM net.waefers.messaging.Message <init>
+FINEST: new message source uri:nodemaster@waefers
+Oct 14, 2006 5:21:53 PM net.waefers.client.TestClient main
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=861 msg={type=HEARTBEAT response=null src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=filemaster@waefer #ofblocks=0} id=1150646425 payload={type=PEER uri=nodemaster@waefers #ofblocks=1}}
+Oct 14, 2006 5:22:03 PM net.waefers.client.TestClient main
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=861 msg={type=HEARTBEAT response=null src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=filemaster@waefer #ofblocks=0} id=1150646425 payload={type=PEER uri=nodemaster@waefers #ofblocks=1}}
+Oct 14, 2006 5:22:13 PM net.waefers.client.TestClient main
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=861 msg={type=HEARTBEAT response=null src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=filemaster@waefer #ofblocks=0} id=1150646425 payload={type=PEER uri=nodemaster@waefers #ofblocks=1}}
+Oct 14, 2006 5:22:23 PM net.waefers.client.TestClient main
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=861 msg={type=HEARTBEAT response=null src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=filemaster@waefer #ofblocks=0} id=1150646425 payload={type=PEER uri=nodemaster@waefers #ofblocks=1}}
+Oct 14, 2006 5:22:33 PM net.waefers.client.TestClient main
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=861 msg={type=HEARTBEAT response=null src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=filemaster@waefer #ofblocks=0} id=1150646425 payload={type=PEER uri=nodemaster@waefers #ofblocks=1}}
+Oct 14, 2006 5:22:43 PM net.waefers.client.TestClient main
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=861 msg={type=HEARTBEAT response=null src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=filemaster@waefer #ofblocks=0} id=1150646425 payload={type=PEER uri=nodemaster@waefers #ofblocks=1}}
+Oct 14, 2006 5:22:53 PM net.waefers.client.TestClient main
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=861 msg={type=HEARTBEAT response=null src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=filemaster@waefer #ofblocks=0} id=1150646425 payload={type=PEER uri=nodemaster@waefers #ofblocks=1}}
+Oct 14, 2006 5:23:03 PM net.waefers.client.TestClient main
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=861 msg={type=HEARTBEAT response=null src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=filemaster@waefer #ofblocks=0} id=1150646425 payload={type=PEER uri=nodemaster@waefers #ofblocks=1}}

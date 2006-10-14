@@ -1,0 +1,98 @@
+Oct 14, 2006 5:21:27 PM net.waefers.master.MasterServer run
+FINEST: Master server run method starting
+Oct 14, 2006 5:21:53 PM net.waefers.messaging.MessageControl receive
+FINEST: Good packet
+Oct 14, 2006 5:21:53 PM MasterServer run
+FINER: THROW
+java.lang.IllegalArgumentException: port out of range:-1
+	at java.net.InetSocketAddress.<init>(Unknown Source)
+	at java.net.DatagramPacket.getSocketAddress(Unknown Source)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:216)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:184)
+	at net.waefers.master.MasterServer.run(MasterServer.java:61)
+	at net.waefers.master.MasterServer.begin(MasterServer.java:107)
+	at net.waefers.master.MasterServer.main(MasterServer.java:126)
+Oct 14, 2006 5:22:03 PM net.waefers.messaging.MessageControl receive
+FINEST: Good packet
+Oct 14, 2006 5:22:03 PM MasterServer run
+FINER: THROW
+java.lang.IllegalArgumentException: port out of range:-1
+	at java.net.InetSocketAddress.<init>(Unknown Source)
+	at java.net.DatagramPacket.getSocketAddress(Unknown Source)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:216)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:184)
+	at net.waefers.master.MasterServer.run(MasterServer.java:61)
+	at net.waefers.master.MasterServer.begin(MasterServer.java:107)
+	at net.waefers.master.MasterServer.main(MasterServer.java:126)
+Oct 14, 2006 5:22:13 PM net.waefers.messaging.MessageControl receive
+FINEST: Good packet
+Oct 14, 2006 5:22:13 PM MasterServer run
+FINER: THROW
+java.lang.IllegalArgumentException: port out of range:-1
+	at java.net.InetSocketAddress.<init>(Unknown Source)
+	at java.net.DatagramPacket.getSocketAddress(Unknown Source)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:216)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:184)
+	at net.waefers.master.MasterServer.run(MasterServer.java:61)
+	at net.waefers.master.MasterServer.begin(MasterServer.java:107)
+	at net.waefers.master.MasterServer.main(MasterServer.java:126)
+Oct 14, 2006 5:22:23 PM net.waefers.messaging.MessageControl receive
+FINEST: Good packet
+Oct 14, 2006 5:22:23 PM MasterServer run
+FINER: THROW
+java.lang.IllegalArgumentException: port out of range:-1
+	at java.net.InetSocketAddress.<init>(Unknown Source)
+	at java.net.DatagramPacket.getSocketAddress(Unknown Source)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:216)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:184)
+	at net.waefers.master.MasterServer.run(MasterServer.java:61)
+	at net.waefers.master.MasterServer.begin(MasterServer.java:107)
+	at net.waefers.master.MasterServer.main(MasterServer.java:126)
+Oct 14, 2006 5:22:33 PM net.waefers.messaging.MessageControl receive
+FINEST: Good packet
+Oct 14, 2006 5:22:33 PM MasterServer run
+FINER: THROW
+java.lang.IllegalArgumentException: port out of range:-1
+	at java.net.InetSocketAddress.<init>(Unknown Source)
+	at java.net.DatagramPacket.getSocketAddress(Unknown Source)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:216)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:184)
+	at net.waefers.master.MasterServer.run(MasterServer.java:61)
+	at net.waefers.master.MasterServer.begin(MasterServer.java:107)
+	at net.waefers.master.MasterServer.main(MasterServer.java:126)
+Oct 14, 2006 5:22:43 PM net.waefers.messaging.MessageControl receive
+FINEST: Good packet
+Oct 14, 2006 5:22:43 PM MasterServer run
+FINER: THROW
+java.lang.IllegalArgumentException: port out of range:-1
+	at java.net.InetSocketAddress.<init>(Unknown Source)
+	at java.net.DatagramPacket.getSocketAddress(Unknown Source)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:216)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:184)
+	at net.waefers.master.MasterServer.run(MasterServer.java:61)
+	at net.waefers.master.MasterServer.begin(MasterServer.java:107)
+	at net.waefers.master.MasterServer.main(MasterServer.java:126)
+Oct 14, 2006 5:22:53 PM net.waefers.messaging.MessageControl receive
+FINEST: Good packet
+Oct 14, 2006 5:22:53 PM MasterServer run
+FINER: THROW
+java.lang.IllegalArgumentException: port out of range:-1
+	at java.net.InetSocketAddress.<init>(Unknown Source)
+	at java.net.DatagramPacket.getSocketAddress(Unknown Source)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:216)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:184)
+	at net.waefers.master.MasterServer.run(MasterServer.java:61)
+	at net.waefers.master.MasterServer.begin(MasterServer.java:107)
+	at net.waefers.master.MasterServer.main(MasterServer.java:126)
+Oct 14, 2006 5:23:03 PM net.waefers.messaging.MessageControl receive
+FINEST: Good packet
+Oct 14, 2006 5:23:03 PM MasterServer run
+FINER: THROW
+java.lang.IllegalArgumentException: port out of range:-1
+	at java.net.InetSocketAddress.<init>(Unknown Source)
+	at java.net.DatagramPacket.getSocketAddress(Unknown Source)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:216)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:184)
+	at net.waefers.master.MasterServer.run(MasterServer.java:61)
+	at net.waefers.master.MasterServer.begin(MasterServer.java:107)
+	at net.waefers.master.MasterServer.main(MasterServer.java:126)
