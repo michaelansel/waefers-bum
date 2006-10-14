@@ -28,7 +28,7 @@ public class ReplicaMaster extends MasterServer {
 	 * Contains block->Node mapping
 	 * HashMap<blockID,Node>
 	 */
-	private HashMap<Integer,HashSet<Node>> blockLocs;
+	private HashMap<String,HashSet<Node>> blockLocs;
 	
 	/**
 	 * Current nodes registered on the NodeMaster
@@ -40,7 +40,7 @@ public class ReplicaMaster extends MasterServer {
 	
 	public ReplicaMaster(SocketAddress addr) throws SocketException {
 		super(addr);
-		blockLocs = new HashMap<Integer,HashSet<Node>>();
+		blockLocs = new HashMap<String,HashSet<Node>>();
 	}
 	public ReplicaMaster(int port) throws SocketException {
 		this(new InetSocketAddress(port));
@@ -63,21 +63,39 @@ public class ReplicaMaster extends MasterServer {
 	 * @return
 	 */
 	protected Message location(Message msg) {
-		Message rmsg;
+		Message rmsg = null;
 		LocationMessage lMsg = (LocationMessage) msg.getPayload();
 		
 		switch(lMsg.action) {
 		case ADD:
+			Message.Response[] status = null;
+			int x = 0;
+			//For every block on the peer
 			for( Block block : (Block[]) lMsg.blocks.toArray() ) {
+				log.finest("Adding block:" + block.id + " to directory\n");
+				boolean success = false;
+				//If the block is already in the directory
 				if( blockLocs.containsKey(block) ) {
-					blockLocs.get(block).add(lMsg.node);
+					//Add the node to the end of the set of nodes for this block
+					success = blockLocs.get(block).add(lMsg.node);
+					log.finest("Node added to existing block list");
 				} else {
-					blockLocs.put(block, (new HashSet<Node>).);
+					//Create a new node set
+					HashSet<Node> hs = new HashSet<Node>();
+					//Add the node to the new set
+					hs.add(lMsg.node);
+					//Add the new set to the directory
+					if(blockLocs.put(block.id, hs)!=null) success=true;
+					log.finest("Node added to new block list");
 				}
+				//Set rmsg to action status
+				if(success) status[x] = Message.Response.SUCCESS;
+				status[x] = Message.Response.ERROR;
+				x++;
 			}
+			break;
 		}
-		
-		rmsg=null;
+
 		return rmsg;
 	}
 	

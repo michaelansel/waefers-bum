@@ -34,7 +34,7 @@ public class DirectoryCleaner extends Thread {
 	public void run() {
 		for(Date key : nodeExpiry.headMap(new Date()).keySet()) {
 			NodeEntry deadNode = nodeExpiry.get(key);
-			for(int block : deadNode.node.dataStored) {
+			for(String block : deadNode.node.dataStored) {
 				//Remove <block,<node>> from replica master
 				ReplicaMessage msg = new ReplicaMessage(REMOVE,block,deadNode.node.uri);
 				try {

@@ -29,25 +29,13 @@ import static net.waefers.GlobalControl.DEFAULT_PORT;
  *
  */
 public class MasterServer extends Thread {
-		
-	DatagramSocket server;
-	
-	/**
-	 * Contains filename->block[] mapping
-	 * HashMap<filename,FileEntry(contains block[])>
-	 */
-	private HashMap<String,FileSystemObject> fileDirectory = null;
 	
 	/**
 	 * Initialize listening socket and directories
 	 * @throws SocketException
 	 */
 	public MasterServer(SocketAddress addr) throws SocketException {
-		server = new DatagramSocket(addr);
-		//fileDirectory = new HashMap<String,FileSystemObject>();
-		//blockDirectory = new HashMap<Integer,HashSet<URI>>(); //Move to replica server
-		//replicaList = new LinkedList<Node>();
-		MessageControl.init();
+		MessageControl.init(addr);
 	}
 	public MasterServer(int port) throws SocketException {
 		this(new InetSocketAddress(port));
