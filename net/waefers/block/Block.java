@@ -35,12 +35,12 @@ public class Block {
 	/**
 	 * Data hash (id)
 	 */
-	public String id;
+	public byte[] id;
 	
 	
 	public Block() {
 		type = BlockType.REFERENCE;
-		id = "";
+		id = new byte[20];
 		data = null;
 	}
 	

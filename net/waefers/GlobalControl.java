@@ -16,6 +16,11 @@ public class GlobalControl {
 	public static final int DEFAULT_PORT = 51951;
 	
 	/**
+	 * Whether or not peer to peer system is active
+	 */
+	public static boolean peer2peer = false;
+	
+	/**
 	 * Main logging object
 	 */
 	public static final Logger log = Logger.getLogger("global");

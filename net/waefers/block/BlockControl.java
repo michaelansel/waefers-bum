@@ -13,7 +13,7 @@ public class BlockControl {
 	 * @param id data hash/id
 	 * @return Local data file
 	 */
-	public static File dataFile(String id) {
+	public static File dataFile(byte[] id) {
 		return null;
 	}
 	

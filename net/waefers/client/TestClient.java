@@ -5,11 +5,7 @@ package net.waefers.client;
 
 import static net.waefers.GlobalControl.log;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.URI;
@@ -34,7 +30,7 @@ public class TestClient extends Thread{
 
 	
 	/**
-	 * @param args [-d logfile.txt] MasterIP[:port]
+	 * @param args [-d logfile.txt] listenhost[:port]
 	 * @throws IOException 
 	 * @throws URISyntaxException 
 	 * @throws InterruptedException 
@@ -55,25 +51,22 @@ public class TestClient extends Thread{
 		String s,host;
 		int port;
 		
-		DatagramSocket server = new DatagramSocket(1472);
 		SocketAddress addr;
-		ByteArrayOutputStream bos;
-		ObjectOutputStream oos;
 		Node node = new Node();
-		node.uri = new URI("nodemaster@waefers");
+		node.uri = new URI("testpeer@waefers");
 		log.finest("Local node uri:"+node.uri.toString());
 		node.type = Node.NodeType.PEER;
 		Block b = new Block();
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA");
 			md.update(new String("Test string!").getBytes());
-			b.id = md.digest().toString();
+			b.id = md.digest();
 			log.finest(String.valueOf(b.id));
 		} catch (Exception e) {
 			log.throwing("TestClient", "main", e);
 		}
 		node.dataStored.add(b.id);
-		Message msg = MessageControl.createMessage(node.uri, new URI("filemaster@waefer"), node);
+		Message msg = new Message(node, new Node(URI.create("nodemaster@waefers")), node);
 		
 		
 		if((s=argList.remove(0)).indexOf(":")>0) {
@@ -82,25 +75,14 @@ public class TestClient extends Thread{
 			addr = (SocketAddress) new InetSocketAddress(host,port);
 		} else {
 			host = s;
-			addr = (SocketAddress) new InetSocketAddress(host,51951);
+			addr = (SocketAddress) new InetSocketAddress(host,(int)(Math.random() * 64511)+1024); //Randomly select a port between 1024 and 65535
 		}
 		
-		try {
-			bos = new ByteArrayOutputStream(1472);
-			bos.reset();
-		} catch(Exception e) {
-			e.printStackTrace();
-			return;
-		}
-		
-		oos = new ObjectOutputStream(bos);
-		oos.writeObject(msg);
-		oos.flush();
-		
+		MessageControl.init(addr);
+
 		while(true) {
-			server.send(new DatagramPacket(bos.toByteArray(), bos.size(), addr));
-			log.finer(String.format("SENT: addr=%s size=%d msg=%s", addr, bos.size(), msg));
-			Thread.sleep( (long) 10*1000 );
+			MessageControl.send(msg, false);
+			Thread.sleep( (long) 10 * 1000 );
 		}
 		
 		} catch(Exception e) {
