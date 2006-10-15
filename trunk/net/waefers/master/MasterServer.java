@@ -1,24 +1,14 @@
 package net.waefers.master;
 
 import java.io.IOException;
-import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.net.SocketException;
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 
 import net.waefers.GlobalControl;
-import net.waefers.filesystem.FileSystemObject;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
 
 import static net.waefers.GlobalControl.log;
 import static net.waefers.messaging.Message.Response.*;
-import static net.waefers.GlobalControl.DEFAULT_PORT;
 
 /**
  * 
@@ -28,33 +18,12 @@ import static net.waefers.GlobalControl.DEFAULT_PORT;
  * @author Michael Ansel
  *
  */
-public class MasterServer extends Thread {
-	
-	/**
-	 * Initialize listening socket and directories
-	 * @throws SocketException
-	 */
-	public MasterServer(SocketAddress addr) throws SocketException {
-		MessageControl.init(addr);
-	}
-	public MasterServer(int port) throws SocketException {
-		this(new InetSocketAddress(port));
-	}
-	public MasterServer(String hostname,int port) throws SocketException {
-		this(new InetSocketAddress(hostname,port));
-	}
-	public MasterServer(String hostname) throws SocketException {
-		this(new InetSocketAddress(hostname,DEFAULT_PORT));
-	}
-	public MasterServer() throws SocketException {
-		this(new InetSocketAddress(DEFAULT_PORT));
-	}
-	
+class MasterServer {
 	
 	/**
 	 * Listen for incoming UDP packets and respond accordingly
 	 */
-	public void run() {
+	public void receiveAndProcess() {
 		log.finest("Master server run method starting");
 
 		while(true) {
@@ -73,8 +42,11 @@ public class MasterServer extends Thread {
 			case METADATA: //Packet concerning file system information
 				rmsg = meta(msg);
 				break;
-			case LOCATION: //Packet concerning block replica locations
-				rmsg = location(msg);
+			case BLOCK_LOCATION: //Packet concerning block replica locations
+				rmsg = blockLocation(msg);
+				break;
+			case NODE_LOCATION: //Packet concerning the direct connection addresses for nodes
+				rmsg = nodeLocation(msg);
 				break;
 			default:
 				rmsg = MessageControl.createReply(msg,ERROR,null);
@@ -83,35 +55,40 @@ public class MasterServer extends Thread {
 			
 			MessageControl.send(rmsg);
 		}
-		
-		//log.finest("Master server run method ending");
 	}
 	
 	protected Message heartbeat(Message msg) {
-		return MessageControl.createReply(msg,ERROR,null);
+		return error(msg);
 	}
 	
 	protected Message block(Message msg) {
-		return MessageControl.createReply(msg,ERROR,null);
+		return error(msg);
 	}
 	
 	protected Message meta(Message msg) {
+		return error(msg);
+	}
+	
+	protected Message blockLocation(Message msg) {
+		return error(msg);
+	}
+	
+	protected Message nodeLocation(Message msg) {
+		return error(msg);
+	}
+	
+	private Message error(Message msg) {
+		log.finest("Default processing method. Returning ERROR!");
 		return MessageControl.createReply(msg,ERROR,null);
 	}
 	
-	protected Message location(Message msg) {
-		return MessageControl.createReply(msg,ERROR,null);
+	protected void start() {
+		log.finest("MS-Start");
+		MessageControl.init();
+		receiveAndProcess();
 	}
 	
-	public static void begin() throws SocketException {
-		new MasterServer().run();
-	}
-	
-	/**
-	 * Start a MasterServer
-	 * @param args [-d filename.log] <Replica URI:hostname:port> <ReplicaURI:hostname:port>...
-	 */
-	public static void main(String[] args) throws IOException {
+	protected void processArgs(String[] args) throws IOException {
 		ArrayList<String> argList = new ArrayList<String>();
 		for (String arg : args) {
 			log.finer("argument:"+arg);
@@ -122,8 +99,15 @@ public class MasterServer extends Thread {
 			argList.remove(0);
 			argList.remove(0);
 		}
-		
-		begin();
 	}
-
+	
+	/**
+	 * Start a MasterServer
+	 * @param args [-d filename.log]
+	 */
+	public static void main(String[] args) throws IOException {
+		MasterServer ms = new MasterServer();
+		ms.processArgs(args);
+		ms.start();
+	}
 }

@@ -22,7 +22,10 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.sun.jndi.cosnaming.IiopUrl.Address;
+
 import net.waefers.messaging.Message.Response;
+import net.waefers.node.Node;
 import net.waefers.node.NodeControl;
 import static net.waefers.GlobalControl.DEFAULT_PORT;
 
@@ -76,13 +79,13 @@ public class MessageControl {
 	 * @param selector selector to register with
 	 * @return 
 	 */
-	public static boolean init(SocketAddress addr) {
+	public static boolean init(SocketAddress localAddr) {
 		try {
 			server = DatagramChannel.open();
 			selector = Selector.open();
 			server.configureBlocking(false);
 			key = server.register(selector, SelectionKey.OP_READ);
-			server.socket().bind(addr);
+			server.socket().bind(localAddr);
 			bos = new ByteArrayOutputStream(1472);
 			
 			
@@ -121,7 +124,7 @@ public class MessageControl {
 	/**
 	 * Send a message with verification (returns reply)
 	 * @param msg message to send
-	 * @param verify whether or not to guarantee reply
+	 * @param verify whether or not to wait for reply
 	 * @return Message verification message received or null if verify=false
 	 * @throws IOException
 	 */
@@ -135,14 +138,21 @@ public class MessageControl {
 			}
 			msg.bbuf.mark();
 			Message rmsg = null;
+
+			Timer timer = new Timer();
+			(new SendTimerTask(msg)).run();
+			Thread.sleep( (long) 1000 ); //Give message time to be sent, processed and returned
+			timer.schedule( new SendTimerTask(msg), (long) 0, (long) 10*1000 ); //Schedule the resender
+
+			if(!verify) {
+				timer.cancel();
+				return null;
+			}
+			
 			while(rmsg == null) {
-				Timer timer = new Timer();
-				timer.schedule(new SendTimerTask(msg), 0, 10*1000);
-				if(!verify) break;
-				rmsg = receive(msg.id,true); //Check for instantaneous response
-				Thread.sleep( (long) 1000 ); //Give message time to go back and forth
 				rmsg = receive(msg.id,true); //Due to recursiveness of receive method, has possibility of never returning. Need a way to prevent this and a) kill request; and b) resend message then retry receive
 			}
+			
 			return rmsg;
 		} catch (Exception e) {
 			log.throwing("MessageControl", "send", e);
@@ -160,9 +170,20 @@ public class MessageControl {
 		
 		public void run() {
 			try {
-				server.send(msg.bbuf, NodeControl.getSocketAddress(msg.getDestination()));
+				SocketAddress sendTo;
+				if( msg.dstSAddr == null && msg.getDestination().address == null ) {
+					sendTo = NodeControl.getSocketAddress(msg.getDestination());
+					server.send(msg.bbuf, sendTo);
+				} else if(msg.dstSAddr == null){
+					sendTo = msg.getDestination().address;
+					server.send(msg.bbuf, sendTo);
+				} else {
+					sendTo = msg.dstSAddr;
+					server.send(msg.bbuf, sendTo);
+				}
+				
 				msg.bbuf.reset();
-				log.fine("Sending to "+server.socket().getLocalSocketAddress()+": msg="+msg);
+				log.finer(String.format("SENT: addr=%s size=%d msg=%s", sendTo, bos.size(), msg));
 			} catch(IOException e) {
 				log.throwing("MessageControl", "SendTimerTask.run", e);
 			}
@@ -197,7 +218,8 @@ public class MessageControl {
 		Message msg = null;
 		try {
 			synchronized(rbuf) {
-				if(server.receive(rbuf) == null) return null;
+				SocketAddress addr = server.receive(rbuf);
+				if(addr == null) return null;
 				rbuf.flip();
 				DatagramPacket pkt = new DatagramPacket(rbuf.array(),rbuf.limit());
 				if(pkt.getLength() == 0) {
@@ -205,7 +227,9 @@ public class MessageControl {
 					return null;
 				}
 				
-				log.finest("Good packet");
+				log.finest("pkt=" + pkt.toString());
+				log.finest("pktAddr="+addr);
+				log.finest("pktLength="+pkt.getLength());
 				
 				/* Convert packet back into a Message */
 				ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(pkt.getData()));
@@ -213,10 +237,10 @@ public class MessageControl {
 				
 				if(msg.id==0) return null;
 				
-				msg.srcAddr = pkt.getSocketAddress();
-				msg.dstAddr = server.socket().getLocalSocketAddress();
+				msg.srcSAddr = addr;
+				msg.dstSAddr = server.socket().getLocalSocketAddress();
 				
-				log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", pkt.getSocketAddress(), pkt.getLength(), msg));
+				log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", addr, pkt.getLength(), msg));
 				
 				if(!checkID) {
 					msgLog.put(msg.id,msg.noPayload());
@@ -237,18 +261,6 @@ public class MessageControl {
 	}
 	
 	/**
-	 * Creates a new Message object
-	 * @param source local address
-	 * @param destination remote address
-	 * @param payload message data
-	 * @return new Message object
-	 */
-	public static Message createMessage(URI source,URI destination,Object payload) {
-		return new Message(source,destination,payload);
-		
-	}
-	
-	/**
 	 * Creates a new reply by reversing the source and destination
 	 * URIs and giving the new Message the same ID as the old
 	 * @param msg Message to reply to
@@ -258,7 +270,10 @@ public class MessageControl {
 	public static Message createReply(Message msg, Response response, Object payload) {
 		Message rmsg = new Message(msg.getDestination(),msg.getSource(),payload);
 		rmsg.id = msg.id;
+		rmsg.type = msg.type;
 		rmsg.response = response;
+		rmsg.srcSAddr = msg.dstSAddr;
+		rmsg.dstSAddr = msg.srcSAddr;
 		return rmsg;
 	}
 	

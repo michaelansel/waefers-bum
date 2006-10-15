@@ -1,19 +1,17 @@
 package net.waefers.master;
 
 import static net.waefers.GlobalControl.log;
-import static net.waefers.GlobalControl.DEFAULT_PORT;
-import static net.waefers.master.ReplicaControl.replicaList;
 import static net.waefers.messaging.Message.Response.ERROR;
 import static net.waefers.messaging.Message.Response.SUCCESS;
 
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.net.SocketException;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
+import net.waefers.GlobalControl;
 import net.waefers.directory.DirectoryCleaner;
 import net.waefers.directory.NodeEntry;
 import net.waefers.messaging.Message;
@@ -33,30 +31,19 @@ public class NodeMaster extends MasterServer {
 	 * Map of expiration times to nodes for easy cleaning
 	 */
 	private TreeMap<Date,NodeEntry> nodeExpiry = null;
-	
-	
-//Constructors
-	
-	public NodeMaster(SocketAddress addr) throws SocketException {
-		super(addr);
-		nodeDirectory = new HashMap<URI,NodeEntry>();
-		nodeExpiry = new TreeMap<Date,NodeEntry>();
-		new DirectoryCleaner(nodeExpiry).start();
-	}
-	public NodeMaster(int port) throws SocketException {
-		this(new InetSocketAddress(port));
-	}
-	public NodeMaster(String hostname,int port) throws SocketException {
-		this(new InetSocketAddress(hostname,port));
-	}
-	public NodeMaster(String hostname) throws SocketException {
-		this(new InetSocketAddress(hostname,DEFAULT_PORT));
-	}
-	public NodeMaster() throws SocketException {
-		this(new InetSocketAddress(DEFAULT_PORT));
-	}
 
 //Methods specific to this Server	
+	
+	/**
+	 * 
+	 */
+	public Map<Date,NodeEntry> getExpired() {
+		return nodeExpiry.headMap(new Date());
+	}
+	
+	public NodeEntry removeExpiredEntry(Date key) {
+		return nodeExpiry.remove(key);
+	}
 	
 	/**
 	 * Process heartbeat message and add/update node in the directory
@@ -67,28 +54,68 @@ public class NodeMaster extends MasterServer {
 		Message rmsg;
 		NodeEntry src;
 		src = nodeDirectory.get(msg.getSource());
+		log.finest("Heartbeat message received from "+msg.getSource().uri);
 		
-		if(src == null || src.expires.before(new Date())) {
+		//If node is not in the directory or if it has expired
+		if( src == null || src.expires.before(new Date()) ) {
 			NodeEntry ne = new NodeEntry((Node)msg.getPayload());
 			nodeDirectory.put(((Node)msg.getPayload()).uri,ne);
 			ne.updateExpiryTime();
 			nodeExpiry.put(ne.expires,ne);
-			log.fine(msg.getSource() + " registered as " + msg.srcAddr);
-			rmsg = MessageControl.createReply(msg,SUCCESS,replicaList);
-		} else if(src.node.address.equals(msg.srcAddr)) { //If IP address is equal
+			log.fine(msg.getSource() + " registered as " + msg.srcSAddr);
+			rmsg = MessageControl.createReply(msg,SUCCESS,null);
+		} else if(src.node.address.equals(msg.srcSAddr)) { //If the node is really who it says it is
 			src.updateExpiryTime();
-			if(!src.node.address.equals(msg.srcAddr)) //If IP:port is not equal
-				log.fine(msg.getSource() + " is now " + msg.srcAddr);
+			log.finer(src.node.uri + " expiration time updated");
+				if(!src.node.address.equals(msg.srcSAddr)) //If the directory is out of sync with the node address
+				log.fine(msg.getSource() + " is now " + msg.srcSAddr);
 
-			rmsg = MessageControl.createReply(msg,SUCCESS,replicaList);
+			rmsg = MessageControl.createReply(msg,SUCCESS,null);
 		} else {
-			rmsg = MessageControl.createReply(msg,ERROR,replicaList);
+			log.finer("Unable to work with heartbeat");
+			rmsg = MessageControl.createReply(msg,ERROR,null);
 		}
 		return rmsg;
 	}
 	
-	public static void begin() throws SocketException {
-		new NodeMaster().run();
+	/**
+	 * Process node address requests
+	 * @param msg Raw incoming message to process
+	 * @return Reply to incoming message
+	 */
+	protected Message nodeLocation(Message msg) {
+		Message rmsg;
+		NodeEntry ne;
+		log.finest("Node location request received from:"+msg.getSource()+" for "+((Node)msg.getPayload()).uri);
+		ne = nodeDirectory.get(((Node)msg.getPayload()).uri);
+		
+		//If node is in the directory and has not expired
+		if(!(ne == null || ne.expires.before(new Date()))) {
+			log.fine(ne.node.uri + " registered as " + ne.node.address);
+			rmsg = MessageControl.createReply(msg,SUCCESS,ne.node);
+		} else {
+			rmsg = MessageControl.createReply(msg,ERROR,null);
+		}
+		return rmsg;
 	}
-
+	
+	protected void start() {
+		log.finest("NM-Start");
+		nodeDirectory = new HashMap<URI,NodeEntry>();
+		nodeExpiry = new TreeMap<Date,NodeEntry>();
+		new DirectoryCleaner(this).start();
+		MessageControl.init();
+		receiveAndProcess();
+	}
+	
+	/**
+	 * Start a NodeMaster
+	 * @param args [-d filename.log]
+	 */
+	public static void main(String[] args) throws IOException {
+		NodeMaster nm = new NodeMaster();
+		nm.processArgs(args);
+		GlobalControl.logToConsole();
+		nm.start();
+	}
 }

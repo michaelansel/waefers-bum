@@ -20,12 +20,4 @@ public class MetaMaster {
 	private HashMap<String,FileSystemObject> fileDirectory = null;
 	
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

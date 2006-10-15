@@ -1,5 +1,6 @@
 package net.waefers.messaging;
 
+import java.net.InetAddress;
 import java.net.SocketAddress;
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -27,7 +28,8 @@ public class Message implements java.io.Serializable {
 	 * Source and Destination SocketAddresses
 	 * Retrieved from the socket when message received
 	 */
-	public SocketAddress srcAddr,dstAddr;
+	public SocketAddress srcSAddr,dstSAddr;
+	
 	
 	
 	/**
@@ -40,9 +42,10 @@ public class Message implements java.io.Serializable {
 	 * HEARTBEAT - Register/Update node on the network
 	 * BLOCK - Get/Put block data
 	 * METADATA - Get/Put information concerning the file system
-	 * LOCATION - (Master Only) Get node to request block from
+	 * BLOCK_LOCATION - (Master Only) Get node to request block from
+	 * NODE_LOCATION - Get the direct connect address for a node
 	 */
-	public enum Type {HEARTBEAT,BLOCK,METADATA,LOCATION};
+	public enum Type {HEARTBEAT,BLOCK,METADATA,BLOCK_LOCATION,NODE_LOCATION};
 	
 	/**
 	 * Message type
@@ -101,6 +104,10 @@ public class Message implements java.io.Serializable {
 		this(source,destination,null);
 	}
 	
+	public Message() {
+		
+	}
+	
 	public Node getSource() {
 		return source;
 	}
@@ -121,11 +128,17 @@ public class Message implements java.io.Serializable {
 		payload = null;
 	}
 	
-	//TODO: Does this kill the payload on the original message?
+	//TODO: Does this kill the payload on the original message? Yup!
 	public Message noPayload() {
-		Message msg = this;
-		msg.killPayload();
-		return msg;
+		Message msg;
+		try {
+			msg = (Message) this.clone();
+			msg.killPayload();
+			return msg;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public boolean isError() {

@@ -1,20 +1,13 @@
 package net.waefers.master;
 
 import static net.waefers.GlobalControl.log;
-import static net.waefers.GlobalControl.DEFAULT_PORT;
-import static net.waefers.master.ReplicaControl.replicaList;
-import static net.waefers.messaging.Message.Response.ERROR;
-import static net.waefers.messaging.Message.Response.SUCCESS;
 
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.net.SocketException;
-import java.net.URI;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import net.waefers.GlobalControl;
 import net.waefers.block.Block;
-import net.waefers.directory.DirectoryCleaner;
 import net.waefers.messaging.LocationMessage;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
@@ -28,41 +21,21 @@ public class ReplicaMaster extends MasterServer {
 	 * Contains block->Node mapping
 	 * HashMap<blockID,Node>
 	 */
-	private HashMap<String,HashSet<Node>> blockLocs;
+	private static HashMap<byte[],HashSet<Node>> blockLocs;
 	
 	/**
 	 * Current nodes registered on the NodeMaster
 	 */
 	private HashSet<Node> curNodes;
 	
-	
-//Constructors
-	
-	public ReplicaMaster(SocketAddress addr) throws SocketException {
-		super(addr);
-		blockLocs = new HashMap<String,HashSet<Node>>();
-	}
-	public ReplicaMaster(int port) throws SocketException {
-		this(new InetSocketAddress(port));
-	}
-	public ReplicaMaster(String hostname,int port) throws SocketException {
-		this(new InetSocketAddress(hostname,port));
-	}
-	public ReplicaMaster(String hostname) throws SocketException {
-		this(new InetSocketAddress(hostname,DEFAULT_PORT));
-	}
-	public ReplicaMaster() throws SocketException {
-		this(new InetSocketAddress(DEFAULT_PORT));
-	}
-
 //Methods specific to this Server	
 	
 	/**
-	 * Process heartbeat message and add/update node in the directory
+	 * Process location message and return requested information/success-fail
 	 * @param msg
-	 * @return
+	 * @return reply message
 	 */
-	protected Message location(Message msg) {
+	protected Message blockLocation(Message msg) {
 		Message rmsg = null;
 		LocationMessage lMsg = (LocationMessage) msg.getPayload();
 		
@@ -99,8 +72,21 @@ public class ReplicaMaster extends MasterServer {
 		return rmsg;
 	}
 	
-	public static void begin() throws SocketException {
-		new ReplicaMaster().run();
+	public void start() {
+		blockLocs = new HashMap<byte[],HashSet<Node>>();
+		MessageControl.init();
+		receiveAndProcess();
+	}
+	
+	/**
+	 * Start a ReplicaMaster
+	 * @param args [-d filename.log]
+	 */
+	public static void main(String[] args) throws IOException {
+		ReplicaMaster rm = new ReplicaMaster();
+		rm.processArgs(args);
+		GlobalControl.logToConsole();
+		rm.start();
 	}
 
 }
