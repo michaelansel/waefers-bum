@@ -46,6 +46,8 @@ public class ReplicaMaster extends MasterServer {
 		case ADD:
 			Message.Response[] status = null;
 			int x = 0;
+			curNodes.add(lMsg.node);
+			
 			//For every block on the peer
 			for( Block block : (Block[]) lMsg.blocks.toArray() ) {
 				log.finest("Adding block:" + block.id + " to directory\n");
@@ -81,7 +83,7 @@ public class ReplicaMaster extends MasterServer {
 		Node node = new Node(URI.create("replicamaster@waefers"));
 		node.type = Node.Type.MASTER;
 		Timer t = new Timer();
-		t.schedule(new Heartbeat(node), 0, 4*60*1000);
+		t.schedule(new Heartbeat(node), 0, 4*60*1000); //Update ReplicaMaster on NodeMaster every 4 minutes
 		receiveAndProcess();
 	}
 	
