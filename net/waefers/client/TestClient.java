@@ -55,7 +55,7 @@ public class TestClient extends Thread{
 		Node node = new Node();
 		node.uri = new URI("testpeer@waefers");
 		log.finest("Local node uri:"+node.uri.toString());
-		node.type = Node.NodeType.PEER;
+		node.type = Node.Type.PEER;
 		Block b = new Block();
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA");
@@ -65,7 +65,9 @@ public class TestClient extends Thread{
 		} catch (Exception e) {
 			log.throwing("TestClient", "main", e);
 		}
-		node.dataStored.add(b.id);
+		Block block = new Block();
+		b.id = b.id;
+		node.dataStored.add(block);
 		Message msg = new Message(node, new Node(URI.create("nodemaster@waefers")), node);
 		
 		

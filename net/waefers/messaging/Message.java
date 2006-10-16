@@ -131,18 +131,21 @@ public class Message implements java.io.Serializable {
 	//TODO: Does this kill the payload on the original message? Yup!
 	public Message noPayload() {
 		Message msg;
-		try {
-			msg = (Message) this.clone();
-			msg.killPayload();
-			return msg;
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-			return null;
-		}
+		msg = (Message) this.clone();
+		msg.killPayload();
+		return msg;
 	}
 	
 	public boolean isError() {
 		return (response == Response.ERROR);
+	}
+	
+	public Message clone() {
+		Message msg = new Message(source,destination,payload);
+		msg.id=this.id;
+		msg.type=this.type;
+		msg.response=this.response;
+		return msg;
 	}
 	
 	public int hashCode() {

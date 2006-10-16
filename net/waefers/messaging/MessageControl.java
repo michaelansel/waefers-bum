@@ -10,22 +10,18 @@ import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
-import java.nio.channels.spi.SelectorProvider;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import com.sun.jndi.cosnaming.IiopUrl.Address;
+import java.util.TreeSet;
 
 import net.waefers.messaging.Message.Response;
-import net.waefers.node.Node;
 import net.waefers.node.NodeControl;
 import static net.waefers.GlobalControl.DEFAULT_PORT;
 
@@ -61,9 +57,14 @@ public class MessageControl {
 	static LinkedList<Integer> queueList = new LinkedList<Integer>();
 	
 	/**
-	 * Array of all messages received sans payload indexed by ID
+	 * HashMap of all messages received sans payload indexed by ID
 	 */
 	static HashMap<Integer,Message> msgLog = new HashMap<Integer,Message>();
+	
+	/**
+	 * TreeSet of all messages waiting for responses
+	 */
+	static TreeSet<Integer> waiting = new TreeSet<Integer>();
 	
 	/**
 	 * Selector and selectionKey
@@ -112,6 +113,10 @@ public class MessageControl {
 		return init(new InetSocketAddress(DEFAULT_PORT));
 	}
 	
+	public static boolean initRand() {
+		return init((int)(Math.random() * 64511)+1024);
+	}
+	
 	/**
 	 * Send a message, no verification
 	 * @param msg message to send
@@ -141,17 +146,21 @@ public class MessageControl {
 
 			Timer timer = new Timer();
 			(new SendTimerTask(msg)).run();
-			Thread.sleep( (long) 1000 ); //Give message time to be sent, processed and returned
 			timer.schedule( new SendTimerTask(msg), (long) 0, (long) 10*1000 ); //Schedule the resender
+			Thread.sleep( (long) 1000 ); //Give message time to be sent, processed and returned
 
 			if(!verify) {
 				timer.cancel();
 				return null;
 			}
 			
+			//Wait for a response
 			while(rmsg == null) {
-				rmsg = receive(msg.id,true); //Due to recursiveness of receive method, has possibility of never returning. Need a way to prevent this and a) kill request; and b) resend message then retry receive
+				rmsg = receive(msg.id,true);
 			}
+			
+			//Response recieved, kill the resend thread
+			timer.cancel();
 			
 			return rmsg;
 		} catch (Exception e) {
@@ -197,11 +206,6 @@ public class MessageControl {
 	 * @throws IOException
 	 */
 	public static Message receive() {
-		if(!queue.isEmpty()) {
-			Message msg = queue.remove(queueList.removeFirst());
-			msgLog.put(msg.id,msg.noPayload()); //msg.noPayload() might kill the payload on the original message
-			return msg;
-		}
 		return receive(0,false);
 	}
 	
@@ -215,27 +219,66 @@ public class MessageControl {
 		} catch(Exception e) {
 			log.throwing("MessageControl", "receive", e);
 		}
+		
+		if(queue.containsKey(id)) {
+			Message msg = queue.remove(id);
+			queueList.remove(id);
+			msgLog.put(msg.id,msg.noPayload());
+			return msg;
+		}
+		
+		if(!checkID && !queueList.isEmpty()) {
+			Message msg = queue.remove(queueList.removeFirst());
+			if(!waiting.isEmpty() && !waiting.contains(queueList.getFirst())) {
+				msgLog.put(msg.id,msg.noPayload());
+				log.finest("Waiting, but not for first in queueList msg="+msg.toString());
+				return msg;
+			} else if(waiting.isEmpty()) {
+				msgLog.put(msg.id,msg.noPayload());
+				log.finest("Not waiting msg="+msg.toString());
+				return msg;
+			}
+			log.finest("Waiting for first message in queueList msg="+msg.toString());
+			queueList.addLast(queueList.removeFirst());
+			receive(id,checkID);
+		}
+		
 		Message msg = null;
+		
+		if(msgLog.containsKey(id)) {
+			log.finest("Message already received. Returning noPayload cached version.\nmsg="+msgLog.get(id).toString());
+			return msgLog.get(id);
+		}
+		
 		try {
 			synchronized(rbuf) {
 				SocketAddress addr = server.receive(rbuf);
 				if(addr == null) return null;
 				rbuf.flip();
 				DatagramPacket pkt = new DatagramPacket(rbuf.array(),rbuf.limit());
+				rbuf.clear();
 				if(pkt.getLength() == 0) {
 					log.finest("Null packet");
 					return null;
 				}
 				
-				log.finest("pkt=" + pkt.toString());
-				log.finest("pktAddr="+addr);
-				log.finest("pktLength="+pkt.getLength());
-				
 				/* Convert packet back into a Message */
 				ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(pkt.getData()));
 				msg = (Message) ois.readObject();
 				
-				if(msg.id==0) return null;
+				//If bad message or identifier
+				if(msg==null || msg.id==0) return null;
+				
+				//If message has already been received and processed
+				if(msgLog.containsKey(msg.id) && msgLog.get(msg.id)==msg.noPayload()) {
+					log.finest("Message already recieved, ignoring msg=" + msg.toString());
+					return null;
+				}
+				
+				//If somebody else is waiting for the message
+				if(waiting.contains(msg.id)) {
+					queue.put(msg.id, msg);
+				}
 				
 				msg.srcSAddr = addr;
 				msg.dstSAddr = server.socket().getLocalSocketAddress();
@@ -257,7 +300,7 @@ public class MessageControl {
 			log.throwing("MasterServer", "run", e);
 			return null;
 		}
-		return receive(id,checkID);
+		return null;
 	}
 	
 	/**

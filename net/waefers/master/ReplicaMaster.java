@@ -3,8 +3,11 @@ package net.waefers.master;
 import static net.waefers.GlobalControl.log;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import net.waefers.GlobalControl;
 import net.waefers.block.Block;
@@ -74,8 +77,26 @@ public class ReplicaMaster extends MasterServer {
 	
 	public void start() {
 		blockLocs = new HashMap<byte[],HashSet<Node>>();
-		MessageControl.init();
+		MessageControl.initRand();
+		Node node = new Node(URI.create("replicamaster@waefers"));
+		node.type = Node.Type.MASTER;
+		Timer t = new Timer();
+		t.schedule(new Heartbeat(node), 0, 4*60*1000);
 		receiveAndProcess();
+	}
+	
+	class Heartbeat extends TimerTask {
+		
+		Node node;
+		
+		public Heartbeat(Node node) {
+			this.node = node;
+		}
+		
+		public void run() {
+			Message msg = new Message(node.uri,URI.create("nodemaster@waefers"),node);
+			MessageControl.send(msg,true);
+		}
 	}
 	
 	/**

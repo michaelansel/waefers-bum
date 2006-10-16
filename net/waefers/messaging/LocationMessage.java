@@ -15,12 +15,12 @@ public class LocationMessage extends Message {
 	 * REMOVE_PART: Remove some of the block->node mappings, but leave the node in the directory
 	 * REMOVE_FULL: Remove a node and all its mappings from the directory
 	 */
-	public enum LocationAction {ADD,GET,REMOVE_PART,REMOVE_FULL};
+	public enum Action {ADD,GET,REMOVE_PART,REMOVE_FULL};
 	
 	/**
 	 * Action to perform on replica directory
 	 */
-	public LocationAction action;
+	public Action action;
 	
 	/**
 	 * Set with all local data in it, or references to location on disk
