@@ -252,6 +252,7 @@ public class MessageControl {
 		
 		try {
 			synchronized(rbuf) {
+				rbuf.clear();
 				SocketAddress addr = server.receive(rbuf);
 				if(addr == null) return null;
 				rbuf.flip();
