@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.TreeMap;
 
 import net.waefers.master.NodeMaster;
+import net.waefers.messaging.LocationMessage;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
 
@@ -36,9 +37,15 @@ public class DirectoryCleaner extends Thread {
 	public void run() {
 		for(Date key : nodeMaster.getExpired().keySet()) {
 			NodeEntry deadNode = nodeMaster.removeExpiredEntry(key);
-			MessageControl.init((int)(Math.random() * 64511)+1024);
+			MessageControl.initRand();
 			
-			Message msg = new Message(URI.create("directorycleaner@waefers"),URI.create("replicamaster@waefers"),deadNode);
+			LocationMessage lMsg = new LocationMessage();
+			lMsg.action = LocationMessage.Action.REMOVE_FULL;
+			lMsg.blocks = deadNode.node.dataStored;
+			lMsg.node = deadNode.node;
+			
+			Message msg = new Message(URI.create("directorycleaner@waefers"),URI.create("replicamaster@waefers"),lMsg);
+			msg.type = Message.Type.BLOCK_LOCATION;
 			
 			MessageControl.send(msg,false);
 		}

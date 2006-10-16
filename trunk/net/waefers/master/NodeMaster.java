@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import net.waefers.GlobalControl;
 import net.waefers.directory.DirectoryCleaner;
 import net.waefers.directory.NodeEntry;
+import net.waefers.messaging.LocationMessage;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
 import net.waefers.node.Node;
@@ -35,14 +36,32 @@ public class NodeMaster extends MasterServer {
 //Methods specific to this Server	
 	
 	/**
-	 * 
+	 * Get all expired nodes
+	 * @return Map of all expired nodes
 	 */
 	public Map<Date,NodeEntry> getExpired() {
 		return nodeExpiry.headMap(new Date());
 	}
 	
+	/**
+	 * Remove and return the entry specified by key
+	 * @param key
+	 * @return removed entry
+	 */
 	public NodeEntry removeExpiredEntry(Date key) {
 		return nodeExpiry.remove(key);
+	}
+	
+	public void addBlocks(Node node) {
+		LocationMessage lMsg = new LocationMessage();
+		lMsg.action = LocationMessage.Action.ADD;
+		lMsg.blocks = node.dataStored;
+		lMsg.node = node;
+		
+		Message msg = new Message(node.uri,URI.create("replicamaster@waefers"),lMsg);
+		msg.type = Message.Type.BLOCK_LOCATION;
+		
+		MessageControl.send(msg,true);
 	}
 	
 	/**
@@ -63,6 +82,7 @@ public class NodeMaster extends MasterServer {
 			ne.updateExpiryTime();
 			nodeExpiry.put(ne.expires,ne);
 			log.fine(msg.getSource() + " registered as " + msg.srcSAddr);
+			if(ne.node.isPeer()) addBlocks(ne.node);
 			rmsg = MessageControl.createReply(msg,SUCCESS,null);
 		} else if(src.node.address.equals(msg.srcSAddr)) { //If the node is really who it says it is
 			src.updateExpiryTime();

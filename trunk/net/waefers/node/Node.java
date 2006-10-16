@@ -5,6 +5,8 @@ import java.net.SocketAddress;
 import java.net.URI;
 import java.util.HashSet;
 
+import net.waefers.block.Block;
+
 /**
  * 
  * Node information object
@@ -24,17 +26,17 @@ public class Node implements java.io.Serializable {
 	/**
 	 * Possible node types
 	 */
-	public enum NodeType {PEER,REPLICA};
+	public enum Type {PEER,MASTER};
 	
 	/**
 	 * Node type
 	 */
-	public NodeType type;
+	public Type type;
 	
 	/**
 	 * ArrayList of data stored on peer
 	 */
-	public HashSet<byte[]> dataStored = new HashSet<byte[]>();
+	public HashSet<Block> dataStored = new HashSet<Block>();
 	
 	/**
 	 * Node external InetSocketAddress
@@ -49,7 +51,7 @@ public class Node implements java.io.Serializable {
 		this(uri,null,null);
 	}
 	
-	public Node(NodeType type) {
+	public Node(Type type) {
 		this(null,null,type);
 	}
 	
@@ -61,14 +63,14 @@ public class Node implements java.io.Serializable {
 		this(uri,addr,null);
 	}
 	
-	public Node(URI uri, SocketAddress addr, NodeType type) {
+	public Node(URI uri, SocketAddress addr, Type type) {
 		this.uri = uri;
 		this.address = (InetSocketAddress) addr;
 		this.type = type;
 	}
 	
 	public boolean isPeer() {
-		return type == NodeType.PEER;
+		return type == Type.PEER;
 	}
 	
 	public int hashCode() {

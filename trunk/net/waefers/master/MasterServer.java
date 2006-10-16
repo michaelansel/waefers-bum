@@ -53,7 +53,7 @@ class MasterServer {
 				break;
 			}
 			
-			MessageControl.send(rmsg);
+			MessageControl.send(rmsg,false);
 		}
 	}
 	
