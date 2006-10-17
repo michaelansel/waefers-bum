@@ -71,16 +71,20 @@ public class TestClient extends Thread{
 		node.dataStored.add(block);
 		Message msg = new Message(node, new Node(URI.create("nodemaster@waefers")), node);
 		
-		
-		if((s=argList.remove(0)).indexOf(":")>0) {
-			host = s.substring(0, s.indexOf(":"));
-			port = Integer.parseInt(s.substring(s.indexOf(":")+1));
-			addr = (SocketAddress) new InetSocketAddress(host,port);
+		if(!argList.isEmpty()) {
+			if((s=argList.remove(0)).indexOf(":")>0) {
+				host = s.substring(0, s.indexOf(":"));
+				port = Integer.parseInt(s.substring(s.indexOf(":")+1));
+				addr = (SocketAddress) new InetSocketAddress(host,port);
+			} else {
+				host = s;
+				addr = (SocketAddress) new InetSocketAddress(host,(int)(Math.random() * 64511)+1024); //Randomly select a port between 1024 and 65535
+			}
 		} else {
-			host = s;
-			addr = (SocketAddress) new InetSocketAddress(host,(int)(Math.random() * 64511)+1024); //Randomly select a port between 1024 and 65535
+			host = "localhost";
+			addr = (SocketAddress) new InetSocketAddress(host,(int)(Math.random() * 64511)+1024); //Randomly select a port between 1024 and 65535 
 		}
-		
+
 		MessageControl.init(addr);
 
 		while(true) {
