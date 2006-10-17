@@ -44,6 +44,7 @@ public class TestClient extends Thread{
 		}
 		if(args[0].equalsIgnoreCase("-d")) {
 			GlobalControl.logToFile(args[1]);
+			GlobalControl.logToConsole();
 			argList.remove(0);
 			argList.remove(0);
 		}

@@ -1,6 +1,5 @@
 package net.waefers.messaging;
 
-import java.net.InetAddress;
 import java.net.SocketAddress;
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -19,7 +18,7 @@ import static net.waefers.GlobalControl.log;
 public class Message implements java.io.Serializable {
 	
 	/**
-	 * Source and Destination URIs for the message
+	 * Source and Destination Nodes for the message
 	 */
 	private Node source = new Node();
 	private Node destination = new Node();
@@ -128,7 +127,6 @@ public class Message implements java.io.Serializable {
 		payload = null;
 	}
 	
-	//TODO: Does this kill the payload on the original message? Yup!
 	public Message noPayload() {
 		Message msg;
 		msg = (Message) this.clone();
@@ -141,7 +139,7 @@ public class Message implements java.io.Serializable {
 	}
 	
 	public Message clone() {
-		Message msg = new Message(source,destination,payload);
+		Message msg = new Message(this.source,this.destination,this.payload);
 		msg.id=this.id;
 		msg.type=this.type;
 		msg.response=this.response;

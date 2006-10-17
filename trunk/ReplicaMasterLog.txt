@@ -1,0 +1,24 @@
+Oct 16, 2006 10:21:37 PM net.waefers.master.MasterServer receiveAndProcess
+FINEST: Master server run method starting
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.Message <init>
+FINEST: new message source uri:replicamaster@waefers
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/192.168.1.101:51951 size=849 msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=945637358 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0}}
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl send
+FINEST: Waiting for the reply to message id=945637358
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl send
+FINEST: Waiting for the reply to message id=945637358
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl send
+FINEST: Waiting for the reply to message id=945637358
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl send
+FINEST: Waiting for the reply to message id=945637358
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl send
+FINEST: Waiting for the reply to message id=945637358
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl send
+FINEST: Waiting for the reply to message id=945637358
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/192.168.1.101:51951 size=1074 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=945637358 payload=null}
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl receive
+FINEST: Found requested message msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=945637358 payload=null}
+Oct 16, 2006 10:21:37 PM net.waefers.messaging.MessageControl send
+FINEST: Response received for id=945637358
