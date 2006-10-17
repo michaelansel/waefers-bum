@@ -135,19 +135,18 @@ public class MessageControl {
 	 */
 	public static Message send(Message msg,boolean verify) {
 		try {
-			if (msg.bbuf == null) {
-				ObjectOutputStream oos = new ObjectOutputStream(bos);
-				oos.writeObject(msg);
-				oos.close();
-				msg.bbuf = ByteBuffer.wrap(bos.toByteArray());
-			}
+			if(msg.bbuf != null) msg.bbuf.clear();
+			ObjectOutputStream oos = new ObjectOutputStream(bos);
+			oos.writeObject(msg);
+			oos.close();
+			msg.bbuf = ByteBuffer.wrap(bos.toByteArray());
+			
 			msg.bbuf.mark();
 			Message rmsg = null;
 
 			Timer timer = new Timer();
-			(new SendTimerTask(msg)).run();
-			timer.schedule( new SendTimerTask(msg), (long) 0, (long) 10*1000 ); //Schedule the resender
-			Thread.sleep( (long) 1000 ); //Give message time to be sent, processed and returned
+			new SendTimerTask(msg).run();
+			timer.schedule( new SendTimerTask(msg), (long) 10*1000, (long) 10*1000 ); //Schedule the resender
 
 			if(!verify) {
 				timer.cancel();
@@ -156,8 +155,11 @@ public class MessageControl {
 			
 			//Wait for a response
 			while(rmsg == null) {
+				log.finest("Waiting for the reply to message id="+msg.id);
 				rmsg = receive(msg.id,true);
 			}
+			msg.bbuf.clear();
+			log.finest("Response received for id="+msg.id);
 			
 			//Response recieved, kill the resend thread
 			timer.cancel();
@@ -220,9 +222,15 @@ public class MessageControl {
 			log.throwing("MessageControl", "receive", e);
 		}
 		
+		if(msgLog.containsKey(id)) {
+			log.finest("Message already received. Returning noPayload cached version.\nmsg="+msgLog.get(id).toString());
+			return msgLog.get(id);
+		}
+		
 		if(queue.containsKey(id)) {
 			Message msg = queue.remove(id);
 			queueList.remove(id);
+			log.finest("Returning message from queue msg="+msg);
 			msgLog.put(msg.id,msg.noPayload());
 			return msg;
 		}
@@ -244,12 +252,7 @@ public class MessageControl {
 		}
 		
 		Message msg = null;
-		
-		if(msgLog.containsKey(id)) {
-			log.finest("Message already received. Returning noPayload cached version.\nmsg="+msgLog.get(id).toString());
-			return msgLog.get(id);
-		}
-		
+
 		try {
 			synchronized(rbuf) {
 				rbuf.clear();
@@ -268,7 +271,10 @@ public class MessageControl {
 				msg = (Message) ois.readObject();
 				
 				//If bad message or identifier
-				if(msg==null || msg.id==0) return null;
+				if(msg==null || msg.id==0) {
+					log.finest("Bad message or id=0 msg="+msg);
+					return null;
+				}
 				
 				//If message has already been received and processed
 				if(msgLog.containsKey(msg.id) && msgLog.get(msg.id)==msg.noPayload()) {
@@ -288,10 +294,12 @@ public class MessageControl {
 				
 				if(!checkID) {
 					msgLog.put(msg.id,msg.noPayload());
+					log.finest("Not checking for a certain message id msg="+msg);
 					return msg;
 				}
 				if(msg.id==id) {
 					msgLog.put(msg.id,msg.noPayload());
+					log.finest("Found requested message msg="+msg);
 					return msg;
 				}
 				queue.put(msg.id, msg);
@@ -301,6 +309,7 @@ public class MessageControl {
 			log.throwing("MasterServer", "run", e);
 			return null;
 		}
+		log.finest("Uhh, yeah, something happened, so we aren't going to return anything!");
 		return null;
 	}
 	

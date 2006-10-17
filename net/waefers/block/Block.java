@@ -13,8 +13,10 @@ import java.nio.ByteBuffer;
 import net.waefers.block.BlockControl;
 import static net.waefers.GlobalControl.log;
 
-public class Block {
+public class Block implements java.io.Serializable {
 	
+	static final long serialVersionUID = 0;
+
 	/**
 	 * Possible block types
 	 * DATA: Block contains the actual data

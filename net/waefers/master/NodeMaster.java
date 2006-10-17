@@ -53,6 +53,7 @@ public class NodeMaster extends MasterServer {
 	}
 	
 	public void addBlocks(Node node) {
+		log.fine("Adding blocks to ReplicaMaster for "+node);
 		LocationMessage lMsg = new LocationMessage();
 		lMsg.action = LocationMessage.Action.ADD;
 		lMsg.blocks = node.dataStored;
@@ -70,6 +71,10 @@ public class NodeMaster extends MasterServer {
 	 * @return
 	 */
 	protected Message heartbeat(Message msg) {
+		if(msg.response!=null) {
+			log.finest("Killing incoming message with a response already msg="+msg);
+			return null;
+		}
 		Message rmsg;
 		NodeEntry src;
 		src = nodeDirectory.get(msg.getSource());
@@ -95,6 +100,7 @@ public class NodeMaster extends MasterServer {
 			log.finer("Unable to work with heartbeat");
 			rmsg = MessageControl.createReply(msg,ERROR,null);
 		}
+		log.finest("Returning reply msg="+rmsg);
 		return rmsg;
 	}
 	
