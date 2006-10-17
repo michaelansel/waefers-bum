@@ -1,8 +1,10 @@
-Oct 16, 2006 10:25:12 PM net.waefers.client.TestClient main
+Oct 17, 2006 10:12:03 AM net.waefers.client.TestClient main
 FINEST: Local node uri:testpeer@waefers
-Oct 16, 2006 10:25:13 PM net.waefers.client.TestClient main
-FINEST: [B@281d4b
-Oct 16, 2006 10:25:13 PM net.waefers.messaging.MessageControl$SendTimerTask run
-FINER: SENT: addr=/192.168.1.101:51951 size=1049 msg={type=HEARTBEAT response=null src={type=PEER uri=testpeer@waefers #ofblocks=1} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1969060102 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}
-Oct 16, 2006 10:25:23 PM net.waefers.messaging.MessageControl$SendTimerTask run
-FINER: SENT: addr=/192.168.1.101:51951 size=2098 msg={type=HEARTBEAT response=null src={type=PEER uri=testpeer@waefers #ofblocks=1} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1969060102 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}
+Oct 17, 2006 10:12:03 AM net.waefers.client.TestClient main
+FINEST: [B@1e3118a
+Oct 17, 2006 10:12:03 AM net.waefers.node.NodeControl getSocketAddress
+FINEST: Finding socket address for node={type=null uri=nodemaster@waefers #ofblocks=0}
+Oct 17, 2006 10:12:03 AM net.waefers.node.NodeControl getSocketAddress
+FINEST: Returning baseNode={type=PEER uri=nodemaster@waefers #ofblocks=0}
+Oct 17, 2006 10:12:03 AM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=1049 msg={type=HEARTBEAT response=null src={type=PEER uri=testpeer@waefers #ofblocks=1} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1246926146 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}

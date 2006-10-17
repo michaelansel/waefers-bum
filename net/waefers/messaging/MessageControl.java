@@ -76,6 +76,11 @@ public class MessageControl {
 	static ObjectOutputStream oos = null;
 	
 	/**
+	 * Whether or not MessageControl has been initialized yet
+	 */
+	public static boolean initialized = false;
+	
+	/**
 	 * Register with the selector
 	 * @param selector selector to register with
 	 * @return 
@@ -88,7 +93,9 @@ public class MessageControl {
 			key = server.register(selector, SelectionKey.OP_READ);
 			server.socket().bind(localAddr);
 			bos = new ByteArrayOutputStream(1472);
+			initialized = true;
 			
+			log.finest("MessageControl initialized on "+localAddr);
 			
 			return true;
 		}catch(Exception e) {
