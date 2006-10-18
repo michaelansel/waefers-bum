@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 import net.waefers.messaging.Message.Response;
 import net.waefers.node.NodeControl;
@@ -48,11 +48,13 @@ public class MessageControl {
 	
 	/**
 	 * Incoming message queue
+	 * <msg.id,msg>
 	 */
 	static HashMap<Integer,Message> queue = new HashMap<Integer,Message>();
 	
 	/**
 	 * List of incoming messages
+	 * <msg.id>
 	 */
 	static LinkedList<Integer> queueList = new LinkedList<Integer>();
 	
@@ -62,9 +64,9 @@ public class MessageControl {
 	static HashMap<Integer,Message> msgLog = new HashMap<Integer,Message>();
 	
 	/**
-	 * TreeSet of all messages waiting for responses
+	 * HashSet of all messages waiting for responses
 	 */
-	static TreeSet<Integer> waiting = new TreeSet<Integer>();
+	static HashSet<Integer> waiting = new HashSet<Integer>();
 	
 	/**
 	 * Selector and selectionKey
@@ -159,16 +161,19 @@ public class MessageControl {
 				timer.cancel();
 				return null;
 			}
+			/* Add this message to the list of messages being waited for */
+			waiting.add(msg.id);
 			
-			//Wait for a response
+			/* Wait for a response */
 			while(rmsg == null) {
-				log.finest("Waiting for the reply to message id="+msg.id);
+				//log.finest("Waiting for the reply to message id="+msg.id);
 				rmsg = receive(msg.id,true);
 			}
+			/* Message sent and received, kill cached version */
 			msg.bbuf.clear();
 			log.finest("Response received for id="+msg.id);
 			
-			//Response recieved, kill the resend thread
+			/* Response recieved, kill the resend thread */
 			timer.cancel();
 			
 			return rmsg;
@@ -185,7 +190,7 @@ public class MessageControl {
 		SendTimerTask(Message msg) {
 			this.msg = msg;
 		}
-		
+		/* The ONLY way to send a message */
 		public void run() {
 			try {
 				SocketAddress sendTo;
@@ -199,7 +204,7 @@ public class MessageControl {
 					sendTo = msg.dstSAddr;
 					server.send(msg.bbuf, sendTo);
 				}
-				
+				/* Reset the cached version of the message back to the mark so it is ready to be sent again */
 				msg.bbuf.reset();
 				log.finer(String.format("SENT: addr=%s size=%d msg=%s", sendTo, bos.size(), msg));
 			} catch(IOException e) {
@@ -229,11 +234,14 @@ public class MessageControl {
 			log.throwing("MessageControl", "receive", e);
 		}
 		
+		/* If looking for a message that has already been received and processed */
 		if(msgLog.containsKey(id)) {
 			log.finest("Message already received. Returning noPayload cached version.\nmsg="+msgLog.get(id).toString());
+			/* Return message without the payload */
 			return msgLog.get(id);
 		}
 		
+		/* If looking for a message in the queue */
 		if(queue.containsKey(id)) {
 			Message msg = queue.remove(id);
 			queueList.remove(id);
@@ -242,31 +250,45 @@ public class MessageControl {
 			return msg;
 		}
 		
+		/* If looking for first available message and there are messages waiting in the queue */
 		if(!checkID && !queueList.isEmpty()) {
+			/* Remove the first message from the queue */
 			Message msg = queue.remove(queueList.removeFirst());
+			
+			/* If there are people waiting for messages, but not the first one in the queue */
 			if(!waiting.isEmpty() && !waiting.contains(queueList.getFirst())) {
 				msgLog.put(msg.id,msg.noPayload());
 				log.finest("Waiting, but not for first in queueList msg="+msg.toString());
 				return msg;
+			/* If there is nobody waiting for a message */
 			} else if(waiting.isEmpty()) {
 				msgLog.put(msg.id,msg.noPayload());
 				log.finest("Not waiting msg="+msg.toString());
 				return msg;
 			}
 			log.finest("Waiting for first message in queueList msg="+msg.toString());
-			queueList.addLast(queueList.removeFirst());
+			/* Someone is waiting for the first message in the queue, so move it to the end */
+			queueList.addLast(msg.id);
+			queue.put(msg.id, msg);
+			/* Try again! */
 			receive(id,checkID);
 		}
 		
 		Message msg = null;
 
+		/* Receive the next incoming message waiting at the socket layer */
 		try {
 			synchronized(rbuf) {
+				/* Clear the receive buffer before doing anything */
 				rbuf.clear();
+				/* Get the next packet */
 				SocketAddress addr = server.receive(rbuf);
 				if(addr == null) return null;
+				/* Get the buffer ready for reading */
 				rbuf.flip();
+				/* Turn the data into a packet */
 				DatagramPacket pkt = new DatagramPacket(rbuf.array(),rbuf.limit());
+				/* Packet made, clear the buffer */
 				rbuf.clear();
 				if(pkt.getLength() == 0) {
 					log.finest("Null packet");
@@ -282,6 +304,15 @@ public class MessageControl {
 					log.finest("Bad message or id=0 msg="+msg);
 					return null;
 				}
+				/* Show that we received a valid packet and successfully converted it back into a Message */
+				log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", addr, pkt.getLength(), msg));
+				
+				/* Destroy the cached version of the message, if there is one (Shouldn't be, it's transient) */
+				msg.bbuf = null;
+				
+				/* Set message return path */
+				msg.srcSAddr = addr;
+				msg.dstSAddr = server.socket().getLocalSocketAddress();
 				
 				//If message has already been received and processed
 				if(msgLog.containsKey(msg.id) && msgLog.get(msg.id)==msg.noPayload()) {
@@ -289,26 +320,30 @@ public class MessageControl {
 					return null;
 				}
 				
-				//If somebody else is waiting for the message
-				if(waiting.contains(msg.id)) {
-					queue.put(msg.id, msg);
+				/* If we are looking for this message */
+				if(msg.id==id) {
+					msgLog.put(msg.id,msg.noPayload());
+					log.finest("Found requested message msg="+msg);
+					return msg;
 				}
 				
-				msg.srcSAddr = addr;
-				msg.dstSAddr = server.socket().getLocalSocketAddress();
+				/* If somebody else is waiting for this message
+				 * Put it in the queue and return a recursive receive() call
+				 */
+				if(waiting.contains(msg.id)) {
+					queue.put(msg.id, msg);
+					return receive(id,checkID);
+				}
 				
-				log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", addr, pkt.getLength(), msg));
 				
 				if(!checkID) {
 					msgLog.put(msg.id,msg.noPayload());
 					log.finest("Not checking for a certain message id msg="+msg);
 					return msg;
 				}
-				if(msg.id==id) {
-					msgLog.put(msg.id,msg.noPayload());
-					log.finest("Found requested message msg="+msg);
-					return msg;
-				}
+				/* Nobody gets this message, just add it to the queue 
+				 * Means we are looking for a specific message, but not this one or any one in the queue
+				 */
 				queue.put(msg.id, msg);
 				queueList.addLast(msg.id);
 			}
@@ -316,7 +351,7 @@ public class MessageControl {
 			log.throwing("MasterServer", "run", e);
 			return null;
 		}
-		log.finest("Uhh, yeah, something happened, so we aren't going to return anything!");
+		log.finest("We are looking for a specific message, but it was not found. Sorry!");
 		return null;
 	}
 	
@@ -328,6 +363,10 @@ public class MessageControl {
 	 * @return new reply message
 	 */
 	public static Message createReply(Message msg, Response response, Object payload) {
+		if(msg.response!=null) {
+			log.finest("Trying to a reply! Returning null; msg="+msg);
+			return null;
+		}
 		Message rmsg = new Message(msg.getDestination(),msg.getSource(),payload);
 		rmsg.id = msg.id;
 		rmsg.type = msg.type;
@@ -335,19 +374,6 @@ public class MessageControl {
 		rmsg.srcSAddr = msg.dstSAddr;
 		rmsg.dstSAddr = msg.srcSAddr;
 		return rmsg;
-	}
-	
-	/**
-	 * Modify an existing message and erase
-	 * the cached serialized version
-	 * @param msg Message to modify
-	 * @param payload Payload for message
-	 * @return modified messge
-	 */
-	public static Message setMessage(Message msg,Object payload) {
-		msg.payload = payload;
-		msg.bbuf = null;
-		return msg;
 	}
 	
 	/**

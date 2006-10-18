@@ -26,6 +26,7 @@ public class Message implements java.io.Serializable {
 	/**
 	 * Source and Destination SocketAddresses
 	 * Retrieved from the socket when message received
+	 * Return path for message reply
 	 */
 	public SocketAddress srcSAddr,dstSAddr;
 	
@@ -34,7 +35,7 @@ public class Message implements java.io.Serializable {
 	/**
 	 * Message data
 	 */
-	Object payload;
+	private Object payload;
 	
 	/**
 	 * Possible message types
@@ -83,7 +84,7 @@ public class Message implements java.io.Serializable {
 		this.destination = destination;
 		this.payload = payload;
 		this.id = last_id++;
-		this.type = Type.HEARTBEAT;
+		this.type = null;
 	}
 	
 	public Message(URI source,URI destination,Object payload) {
@@ -92,7 +93,7 @@ public class Message implements java.io.Serializable {
 		this.destination.uri = destination;
 		this.payload = payload;
 		this.id = last_id++;
-		this.type = Type.HEARTBEAT;
+		this.type = null;
 	}
 	
 	public Message(URI source,URI destination) {
@@ -104,7 +105,7 @@ public class Message implements java.io.Serializable {
 	}
 	
 	public Message() {
-		
+		this((Node)null,(Node)null,(Object)null);
 	}
 	
 	public Node getSource() {
@@ -127,6 +128,18 @@ public class Message implements java.io.Serializable {
 		payload = null;
 	}
 	
+	/**
+	 * Modify the payload of an existing message and kill the cached serialized version
+	 * @param msg Message to modify
+	 * @param payload Payload for message
+	 * @return modified messge
+	 */
+	public static Message setPayload(Message msg,Object payload) {
+		msg.payload = payload;
+		msg.bbuf = null;
+		return msg;
+	}
+	
 	public Message noPayload() {
 		Message msg;
 		msg = (Message) this.clone();
@@ -138,6 +151,10 @@ public class Message implements java.io.Serializable {
 		return (response == Response.ERROR);
 	}
 	
+	/**
+	 * Creates an exact clone of this message with the same message id
+	 * @return Cloned message
+	 */
 	public Message clone() {
 		Message msg = new Message(this.source,this.destination,this.payload);
 		msg.id=this.id;
