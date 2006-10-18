@@ -9,14 +9,17 @@ import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
 import java.util.TreeMap;
 
 import net.waefers.GlobalControl;
+import net.waefers.GlobalObjects;
 import net.waefers.directory.DirectoryCleaner;
 import net.waefers.directory.NodeEntry;
 import net.waefers.messaging.LocationMessage;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
+import net.waefers.messaging.PrintQueue;
 import net.waefers.node.Node;
 
 public class NodeMaster extends MasterServer {
@@ -117,7 +120,7 @@ public class NodeMaster extends MasterServer {
 		
 		//If node is in the directory and has not expired
 		if(!(ne == null || ne.expires.before(new Date()))) {
-			log.fine(ne.node.uri + " registered as " + ne.node.address);
+			log.fine(ne.node.uri + " is currently registered as " + ne.node.address);
 			rmsg = MessageControl.createReply(msg,SUCCESS,ne.node);
 		} else {
 			rmsg = MessageControl.createReply(msg,ERROR,null);
@@ -129,8 +132,11 @@ public class NodeMaster extends MasterServer {
 		log.finest("NM-Start");
 		nodeDirectory = new HashMap<URI,NodeEntry>();
 		nodeExpiry = new TreeMap<Date,NodeEntry>();
+		GlobalObjects.nodeDirectory = nodeDirectory;
 		new DirectoryCleaner(this).start();
 		MessageControl.init();
+		Timer printer = new Timer();
+		printer.schedule(new PrintQueue(), 10*1000, 30*1000);
 		receiveAndProcess();
 	}
 	

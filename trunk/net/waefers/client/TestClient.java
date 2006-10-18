@@ -12,11 +12,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Timer;
 
 import net.waefers.GlobalControl;
 import net.waefers.block.Block;
-import net.waefers.messaging.Message;
+import net.waefers.messaging.Heartbeater;
 import net.waefers.messaging.MessageControl;
+import net.waefers.messaging.PrintQueue;
 import net.waefers.node.Node;
 
 /**
@@ -30,7 +32,7 @@ public class TestClient extends Thread{
 
 	
 	/**
-	 * @param args [-d logfile.txt] listenhost[:port]
+	 * @param args [-d logfile.txt] [listenhost[:port]]
 	 * @throws IOException 
 	 * @throws URISyntaxException 
 	 * @throws InterruptedException 
@@ -69,8 +71,7 @@ public class TestClient extends Thread{
 		Block block = new Block();
 		b.id = b.id;
 		node.dataStored.add(block);
-		Message msg = new Message(node, new Node(URI.create("nodemaster@waefers")), node);
-		
+
 		if(!argList.isEmpty()) {
 			if((s=argList.remove(0)).indexOf(":")>0) {
 				host = s.substring(0, s.indexOf(":"));
@@ -86,11 +87,11 @@ public class TestClient extends Thread{
 		}
 
 		MessageControl.init(addr);
+		Timer printer = new Timer();
+		printer.schedule(new PrintQueue(), 10*1000, 30*1000);
 
-		while(true) {
-			MessageControl.send(msg, false);
-			Thread.sleep( (long) 10 * 1000 );
-		}
+		Timer t = new Timer();
+		t.schedule(new Heartbeater(node),0,10*1000);
 		
 		} catch(Exception e) {
 			log.throwing("TestClient", "main", e);

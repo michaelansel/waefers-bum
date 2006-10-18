@@ -7,13 +7,14 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import net.waefers.GlobalControl;
 import net.waefers.block.Block;
+import net.waefers.messaging.Heartbeater;
 import net.waefers.messaging.LocationMessage;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
+import net.waefers.messaging.PrintQueue;
 import net.waefers.node.Node;
 
 public class ReplicaMaster extends MasterServer {
@@ -83,23 +84,10 @@ public class ReplicaMaster extends MasterServer {
 		Node node = new Node(URI.create("replicamaster@waefers"));
 		node.type = Node.Type.MASTER;
 		Timer t = new Timer();
-		t.schedule(new Heartbeat(node), 0, 4*60*1000); //Update ReplicaMaster on NodeMaster every 4 minutes
+		t.schedule(new Heartbeater(node), 0, 4*60*1000); //Update ReplicaMaster on NodeMaster every 4 minutes
+		Timer printer = new Timer();
+		printer.schedule(new PrintQueue(), 10*1000, 30*1000);
 		receiveAndProcess();
-	}
-	
-	class Heartbeat extends TimerTask {
-		
-		Node node;
-		
-		public Heartbeat(Node node) {
-			this.node = node;
-		}
-		
-		public void run() {
-			Message msg = new Message(node.uri,URI.create("nodemaster@waefers"),node);
-			msg.type=Message.Type.HEARTBEAT;
-			MessageControl.send(msg,true);
-		}
 	}
 	
 	/**
