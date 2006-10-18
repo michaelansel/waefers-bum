@@ -119,7 +119,7 @@ public class MessageControl {
 	}
 	
 	public static boolean init() {
-		return init(new InetSocketAddress(DEFAULT_PORT));
+		return init(new InetSocketAddress("localhost",DEFAULT_PORT));
 	}
 	
 	public static boolean initRand() {
@@ -332,6 +332,7 @@ public class MessageControl {
 				 */
 				if(waiting.contains(msg.id)) {
 					queue.put(msg.id, msg);
+					queueList.add(msg.id);
 					log.finest("Somebody else is looking for this message; queueing msg="+msg);
 					return receive(id,checkID);
 				}
@@ -375,6 +376,14 @@ public class MessageControl {
 		rmsg.srcSAddr = msg.dstSAddr;
 		rmsg.dstSAddr = msg.srcSAddr;
 		return rmsg;
+	}
+	
+	/**
+	 * Get listening address
+	 * @return SocketAddress we are listening on
+	 */
+	public static SocketAddress getAddress() {
+		return server.socket().getLocalSocketAddress();
 	}
 	
 	/**

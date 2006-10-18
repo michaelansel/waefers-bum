@@ -1,87 +1,65 @@
-Oct 18, 2006 11:50:42 AM net.waefers.master.NodeMaster start
+Oct 18, 2006 2:43:17 PM net.waefers.master.NodeMaster start
 FINEST: NM-Start
-Oct 18, 2006 11:50:43 AM net.waefers.messaging.MessageControl init
-FINEST: MessageControl initialized on 0.0.0.0/0.0.0.0:51951
-Oct 18, 2006 11:50:43 AM net.waefers.master.MasterServer receiveAndProcess
+Oct 18, 2006 2:43:17 PM net.waefers.messaging.MessageControl init
+FINEST: MessageControl initialized on localhost/127.0.0.1:51951
+Oct 18, 2006 2:43:17 PM net.waefers.master.MasterServer receiveAndProcess
 FINEST: Master server run method starting
-Oct 18, 2006 11:50:46 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:64497 size=849 msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1396043531 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0}}
-Oct 18, 2006 11:50:46 AM net.waefers.messaging.MessageControl receive
-FINEST: Not checking for a certain message id msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1396043531 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0}}
-Oct 18, 2006 11:50:46 AM net.waefers.master.NodeMaster heartbeat
+Oct 18, 2006 2:43:23 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:49449 size=849 msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=1720517464 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}}
+Oct 18, 2006 2:43:23 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message id msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=1720517464 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}}
+Oct 18, 2006 2:43:23 PM net.waefers.master.NodeMaster heartbeat
 FINEST: Heartbeat message received from replicamaster@waefers
-Oct 18, 2006 11:50:46 AM net.waefers.master.NodeMaster heartbeat
-FINE: {type=null uri=replicamaster@waefers #ofblocks=0} registered as /127.0.0.1:64497
-Oct 18, 2006 11:50:46 AM net.waefers.master.NodeMaster heartbeat
-FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}
-Oct 18, 2006 11:50:46 AM net.waefers.messaging.MessageControl$SendTimerTask run
-FINER: SENT: addr=/127.0.0.1:64497 size=1074 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}
-Oct 18, 2006 11:50:50 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/192.168.1.101:51952 size=1078 msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1923030541 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}
-Oct 18, 2006 11:50:50 AM net.waefers.messaging.MessageControl receive
-FINEST: Not checking for a certain message id msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1923030541 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}
-Oct 18, 2006 11:50:50 AM net.waefers.master.NodeMaster heartbeat
+Oct 18, 2006 2:43:23 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=null uri=replicamaster@waefers #ofblocks=0 address=null} registered as /127.0.0.1:49449
+Oct 18, 2006 2:43:23 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1720517464 payload=null}
+Oct 18, 2006 2:43:23 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:49449 size=1074 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1720517464 payload=null}
+Oct 18, 2006 2:43:27 PM net.waefers.messaging.PrintQueue run
+FINEST: nullMessage Queue
+Message QueueList
+
+Oct 18, 2006 2:43:29 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:57616 size=1078 msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=1992429300 payload={type=PEER uri=testpeer@waefers #ofblocks=1 address=null}}
+Oct 18, 2006 2:43:29 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message id msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=1992429300 payload={type=PEER uri=testpeer@waefers #ofblocks=1 address=null}}
+Oct 18, 2006 2:43:29 PM net.waefers.master.NodeMaster heartbeat
 FINEST: Heartbeat message received from testpeer@waefers
-Oct 18, 2006 11:50:50 AM net.waefers.master.NodeMaster heartbeat
-FINE: {type=null uri=testpeer@waefers #ofblocks=0} registered as /192.168.1.101:51952
-Oct 18, 2006 11:50:50 AM net.waefers.master.NodeMaster addBlocks
-FINE: Adding blocks to ReplicaMaster for {type=PEER uri=testpeer@waefers #ofblocks=1}
-Oct 18, 2006 11:50:50 AM net.waefers.messaging.Message <init>
+Oct 18, 2006 2:43:29 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=null uri=testpeer@waefers #ofblocks=0 address=null} registered as /127.0.0.1:57616
+Oct 18, 2006 2:43:29 PM net.waefers.master.NodeMaster addBlocks
+FINE: Adding blocks to ReplicaMaster for {type=PEER uri=testpeer@waefers #ofblocks=1 address=null}
+Oct 18, 2006 2:43:29 PM net.waefers.messaging.Message <init>
 FINEST: new message source uri:testpeer@waefers
-Oct 18, 2006 11:50:50 AM net.waefers.node.NodeControl getSocketAddress
-FINEST: Finding socket address for node={type=null uri=replicamaster@waefers #ofblocks=0}
-Oct 18, 2006 11:50:50 AM net.waefers.messaging.MessageControl$SendTimerTask run
-FINER: SENT: addr=localhost/127.0.0.1:51951 size=3497 msg={type=NODE_LOCATION response=null src={type=null uri=nodecontrol@waefers #ofblocks=0} dst={type=MASTER uri=nodemaster@waefers #ofblocks=0} id=299381703 payload={type=null uri=replicamaster@waefers #ofblocks=0}}
-Oct 18, 2006 11:50:50 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:51951 size=1472 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}
-Oct 18, 2006 11:50:50 AM net.waefers.messaging.MessageControl receive
-FINEST: We are looking for a specific message, but it was not found. Sorry!
-Oct 18, 2006 11:50:53 AM net.waefers.messaging.PrintQueue run
-FINEST: nullMessage Queue
-{id=1396043531 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}}
-Message QueueList
-{id=1396043531 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}}
-
-Oct 18, 2006 11:51:00 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/192.168.1.101:51952 size=1078 msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1923030541 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}
-Oct 18, 2006 11:51:00 AM net.waefers.messaging.MessageControl receive
-FINEST: We are looking for a specific message, but it was not found. Sorry!
-Oct 18, 2006 11:51:00 AM net.waefers.messaging.MessageControl$SendTimerTask run
-FINER: SENT: addr=localhost/127.0.0.1:51951 size=3497 msg={type=NODE_LOCATION response=null src={type=null uri=nodecontrol@waefers #ofblocks=0} dst={type=MASTER uri=nodemaster@waefers #ofblocks=0} id=299381703 payload={type=null uri=replicamaster@waefers #ofblocks=0}}
-Oct 18, 2006 11:51:00 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:51951 size=1472 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}
-Oct 18, 2006 11:51:00 AM net.waefers.messaging.MessageControl receive
-FINEST: We are looking for a specific message, but it was not found. Sorry!
-Oct 18, 2006 11:51:10 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/192.168.1.101:51952 size=1078 msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1923030541 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}
-Oct 18, 2006 11:51:10 AM net.waefers.messaging.MessageControl receive
-FINEST: We are looking for a specific message, but it was not found. Sorry!
-Oct 18, 2006 11:51:10 AM net.waefers.messaging.MessageControl$SendTimerTask run
-FINER: SENT: addr=localhost/127.0.0.1:51951 size=3497 msg={type=NODE_LOCATION response=null src={type=null uri=nodecontrol@waefers #ofblocks=0} dst={type=MASTER uri=nodemaster@waefers #ofblocks=0} id=299381703 payload={type=null uri=replicamaster@waefers #ofblocks=0}}
-Oct 18, 2006 11:51:10 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:51951 size=1472 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}
-Oct 18, 2006 11:51:10 AM net.waefers.messaging.MessageControl receive
-FINEST: We are looking for a specific message, but it was not found. Sorry!
-Oct 18, 2006 11:51:20 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/192.168.1.101:51952 size=1078 msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1923030541 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}
-Oct 18, 2006 11:51:20 AM net.waefers.messaging.MessageControl receive
-FINEST: We are looking for a specific message, but it was not found. Sorry!
-Oct 18, 2006 11:51:20 AM net.waefers.messaging.MessageControl$SendTimerTask run
-FINER: SENT: addr=localhost/127.0.0.1:51951 size=3497 msg={type=NODE_LOCATION response=null src={type=null uri=nodecontrol@waefers #ofblocks=0} dst={type=MASTER uri=nodemaster@waefers #ofblocks=0} id=299381703 payload={type=null uri=replicamaster@waefers #ofblocks=0}}
-Oct 18, 2006 11:51:20 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:51951 size=1472 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}
-Oct 18, 2006 11:51:20 AM net.waefers.messaging.MessageControl receive
-FINEST: We are looking for a specific message, but it was not found. Sorry!
-Oct 18, 2006 11:51:23 AM net.waefers.messaging.PrintQueue run
-FINEST: nullMessage Queue
-{id=1923030541 msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1923030541 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}}
-{id=1396043531 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}}
-Message QueueList
-{id=1396043531 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}}
-{id=1923030541 msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1923030541 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}}
-{id=1396043531 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}}
-{id=1923030541 msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1923030541 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}}
-{id=1396043531 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}}
-{id=1923030541 msg={type=HEARTBEAT response=null src={type=null uri=testpeer@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1923030541 payload={type=PEER uri=testpeer@waefers #ofblocks=1}}}
-{id=1396043531 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}}
-
+Oct 18, 2006 2:43:29 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: Finding socket address for node={type=null uri=replicamaster@waefers #ofblocks=0 address=null}
+Oct 18, 2006 2:43:29 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: We are the baseNode, getting from directory; node={type=null uri=replicamaster@waefers #ofblocks=0 address=null}
+Oct 18, 2006 2:43:29 PM MessageControl send
+FINER: THROW
+java.lang.NullPointerException
+	at sun.nio.ch.DatagramChannelImpl.send(Unknown Source)
+	at net.waefers.messaging.MessageControl$SendTimerTask.run(MessageControl.java:199)
+	at net.waefers.messaging.MessageControl.send(MessageControl.java:157)
+	at net.waefers.master.NodeMaster.addBlocks(NodeMaster.java:68)
+	at net.waefers.master.NodeMaster.heartbeat(NodeMaster.java:93)
+	at net.waefers.master.MasterServer.receiveAndProcess(MasterServer.java:37)
+	at net.waefers.master.NodeMaster.start(NodeMaster.java:140)
+	at net.waefers.master.NodeMaster.main(NodeMaster.java:151)
+Oct 18, 2006 2:43:29 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=testpeer@waefers #ofblocks=0 address=null} id=1992429300 payload=null}
+Oct 18, 2006 2:43:29 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:57616 size=3458 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=testpeer@waefers #ofblocks=0 address=null} id=1992429300 payload=null}
+Oct 18, 2006 2:43:33 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:49449 size=849 msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=1720517464 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}}
+Oct 18, 2006 2:43:33 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message id msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=1720517464 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}}
+Oct 18, 2006 2:43:33 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Heartbeat message received from replicamaster@waefers
+Oct 18, 2006 2:43:33 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=null uri=replicamaster@waefers #ofblocks=0 address=null} registered as /127.0.0.1:49449
+Oct 18, 2006 2:43:33 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1720517464 payload=null}
+Oct 18, 2006 2:43:33 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:49449 size=4532 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1720517464 payload=null}

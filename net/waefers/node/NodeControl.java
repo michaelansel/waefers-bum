@@ -6,7 +6,6 @@ import java.net.SocketAddress;
 import java.net.URI;
 
 import net.waefers.GlobalObjects;
-import net.waefers.master.NodeMaster;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
 import net.waefers.node.Node.Type;
@@ -27,7 +26,7 @@ public class NodeControl {
 	/**
 	 * Static node to be used as a starting point for all new peers
 	 */
-	static final Node baseNode = new Node( URI.create("nodemaster@waefers"), new InetSocketAddress("localhost",51951), Type.MASTER);
+	static final Node baseNode = new Node( URI.create("nodemaster@waefers"), new InetSocketAddress("localhost",DEFAULT_PORT), Type.MASTER);
 	
 	public static SocketAddress getSocketAddress(Node node) {
 		log.finest("Finding socket address for node="+node);
@@ -54,11 +53,9 @@ public class NodeControl {
 			
 			/* If we are the baseNode, get from the directory */
 			//TODO: Could fail if bound to same address as baseNode, but not baseNode
-			try {
-				new Socket().bind(baseNode.address);
-			} catch(Exception e) {
+			if( baseNode.address.equals(MessageControl.getAddress()) ) {
 				Node foundNode = GlobalObjects.nodeDirectory.get(((Node)msg.getPayload()).uri).node;
-				log.finest("We are the baseNode, getting from directory node="+node);
+				log.finest("We are the baseNode, getting from directory; node="+node);
 				return foundNode.address;
 			}
 			

@@ -78,8 +78,8 @@ public class Node implements java.io.Serializable {
 	}
 	
 	public String toString() {
-		return String.format("{type=%s uri=%s #ofblocks=%s}",
-				type, uri, dataStored.size());
+		return String.format("{type=%s uri=%s #ofblocks=%s address=%s}",
+				type, uri, dataStored.size(), address);
 	}
 
 }
