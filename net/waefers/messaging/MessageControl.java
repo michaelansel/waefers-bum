@@ -39,43 +39,43 @@ public class MessageControl {
 	/**
 	 * DatagramChannel to be used for message communications
 	 */
-	static DatagramChannel server = null;
+	private static DatagramChannel server = null;
 	
 	/**
 	 * Receive buffer
 	 */
-	static ByteBuffer rbuf = ByteBuffer.wrap(new byte[1472]);
+	private static ByteBuffer rbuf = ByteBuffer.wrap(new byte[1472]);
 	
 	/**
 	 * Incoming message queue
 	 * <msg.id,msg>
 	 */
-	static HashMap<Integer,Message> queue = new HashMap<Integer,Message>();
+	protected static HashMap<Integer,Message> queue = new HashMap<Integer,Message>();
 	
 	/**
 	 * List of incoming messages
 	 * <msg.id>
 	 */
-	static LinkedList<Integer> queueList = new LinkedList<Integer>();
+	protected static LinkedList<Integer> queueList = new LinkedList<Integer>();
 	
 	/**
 	 * HashMap of all messages received sans payload indexed by ID
 	 */
-	static HashMap<Integer,Message> msgLog = new HashMap<Integer,Message>();
+	private static HashMap<Integer,Message> msgLog = new HashMap<Integer,Message>();
 	
 	/**
 	 * HashSet of all messages waiting for responses
 	 */
-	static HashSet<Integer> waiting = new HashSet<Integer>();
+	private static HashSet<Integer> waiting = new HashSet<Integer>();
 	
 	/**
 	 * Selector and selectionKey
 	 */
-	static Selector selector;
-	static SelectionKey key;
+	private static Selector selector;
+	private static SelectionKey key;
 	
-	static ByteArrayOutputStream bos = null;
-	static ObjectOutputStream oos = null;
+	private static ByteArrayOutputStream bos = null;
+	private static ObjectOutputStream oos = null;
 	
 	/**
 	 * Whether or not MessageControl has been initialized yet
@@ -315,7 +315,7 @@ public class MessageControl {
 				msg.dstSAddr = server.socket().getLocalSocketAddress();
 				
 				//If message has already been received and processed
-				if(msgLog.containsKey(msg.id) && msgLog.get(msg.id)==msg.noPayload()) {
+				if(msgLog.containsKey(msg.id) && msgLog.get(msg.id).equals(msg.noPayload())) {
 					log.finest("Message already recieved, ignoring msg=" + msg.toString());
 					return null;
 				}
@@ -332,6 +332,7 @@ public class MessageControl {
 				 */
 				if(waiting.contains(msg.id)) {
 					queue.put(msg.id, msg);
+					log.finest("Somebody else is looking for this message; queueing msg="+msg);
 					return receive(id,checkID);
 				}
 				

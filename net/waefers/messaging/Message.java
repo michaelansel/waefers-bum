@@ -167,12 +167,18 @@ public class Message implements java.io.Serializable {
 		return source.hashCode() ^ destination.hashCode() ^ id;
 	}
 	
+	/**
+	 * Returns whether or not message id and (source,destination) pair are all equal
+	 * Does not check for payload equality
+	 */
 	public boolean equals(Object o) {
 		if (o instanceof Message) {
         	Message msg = (Message) o;
-            return ((source.equals(msg.getSource()) && destination.equals(msg.getDestination())) ||
-            		(source.equals(msg.getDestination()) && destination.equals(msg.getSource())))
-            		&& id == msg.id;
+            return (
+            		(id == msg.id) &&
+            		(source.equals(msg.getSource()) && destination.equals(msg.getDestination())) ||
+            		(source.equals(msg.getDestination()) && destination.equals(msg.getSource()))
+            		);
         } else {
         	return false;
         }
