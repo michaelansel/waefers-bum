@@ -97,6 +97,7 @@ public class ReplicaMaster extends MasterServer {
 		
 		public void run() {
 			Message msg = new Message(node.uri,URI.create("nodemaster@waefers"),node);
+			msg.type=Message.Type.HEARTBEAT;
 			MessageControl.send(msg,true);
 		}
 	}
