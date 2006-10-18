@@ -1,26 +1,42 @@
-Oct 18, 2006 11:50:45 AM net.waefers.messaging.MessageControl init
-FINEST: MessageControl initialized on 0.0.0.0/0.0.0.0:64497
-Oct 18, 2006 11:50:45 AM net.waefers.master.MasterServer receiveAndProcess
+Oct 18, 2006 2:43:23 PM net.waefers.messaging.MessageControl init
+FINEST: MessageControl initialized on 0.0.0.0/0.0.0.0:49449
+Oct 18, 2006 2:43:23 PM net.waefers.master.MasterServer receiveAndProcess
 FINEST: Master server run method starting
-Oct 18, 2006 11:50:45 AM net.waefers.messaging.Message <init>
+Oct 18, 2006 2:43:23 PM net.waefers.messaging.Message <init>
 FINEST: new message source uri:replicamaster@waefers
-Oct 18, 2006 11:50:45 AM net.waefers.node.NodeControl getSocketAddress
-FINEST: Finding socket address for node={type=null uri=nodemaster@waefers #ofblocks=0}
-Oct 18, 2006 11:50:46 AM net.waefers.node.NodeControl getSocketAddress
-FINEST: Returning baseNode={type=MASTER uri=nodemaster@waefers #ofblocks=0}
-Oct 18, 2006 11:50:46 AM net.waefers.messaging.MessageControl$SendTimerTask run
-FINER: SENT: addr=localhost/127.0.0.1:51951 size=849 msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0} dst={type=null uri=nodemaster@waefers #ofblocks=0} id=1396043531 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0}}
-Oct 18, 2006 11:50:46 AM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:51951 size=1074 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}
-Oct 18, 2006 11:50:46 AM net.waefers.messaging.MessageControl receive
-FINEST: Found requested message msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0} dst={type=null uri=replicamaster@waefers #ofblocks=0} id=1396043531 payload=null}
-Oct 18, 2006 11:50:46 AM net.waefers.messaging.MessageControl send
-FINEST: Response received for id=1396043531
-Oct 18, 2006 11:50:55 AM net.waefers.messaging.PrintQueue run
+Oct 18, 2006 2:43:23 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: Finding socket address for node={type=null uri=nodemaster@waefers #ofblocks=0 address=null}
+Oct 18, 2006 2:43:23 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: Returning baseNode={type=MASTER uri=nodemaster@waefers #ofblocks=0 address=localhost/127.0.0.1:51951}
+Oct 18, 2006 2:43:23 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=849 msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=1720517464 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}}
+Oct 18, 2006 2:43:23 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:51951 size=1074 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1720517464 payload=null}
+Oct 18, 2006 2:43:23 PM net.waefers.messaging.MessageControl receive
+FINEST: Somebody else is looking for this message; queueing msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1720517464 payload=null}
+Oct 18, 2006 2:43:23 PM MasterServer run
+FINER: THROW
+java.util.NoSuchElementException
+	at java.util.LinkedList.getFirst(Unknown Source)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:259)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:337)
+	at net.waefers.messaging.MessageControl.receive(MessageControl.java:223)
+	at net.waefers.master.MasterServer.receiveAndProcess(MasterServer.java:30)
+	at net.waefers.master.ReplicaMaster.start(ReplicaMaster.java:90)
+	at net.waefers.master.ReplicaMaster.main(ReplicaMaster.java:101)
+Oct 18, 2006 2:43:33 PM net.waefers.messaging.PrintQueue run
 FINEST: nullMessage Queue
 Message QueueList
 
-Oct 18, 2006 11:51:25 AM net.waefers.messaging.PrintQueue run
-FINEST: nullMessage Queue
-Message QueueList
-
+Oct 18, 2006 2:43:33 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: Finding socket address for node={type=null uri=nodemaster@waefers #ofblocks=0 address=null}
+Oct 18, 2006 2:43:33 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: Returning baseNode={type=MASTER uri=nodemaster@waefers #ofblocks=0 address=localhost/127.0.0.1:51951}
+Oct 18, 2006 2:43:33 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=localhost/127.0.0.1:51951 size=849 msg={type=HEARTBEAT response=null src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=1720517464 payload={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}}
+Oct 18, 2006 2:43:33 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:51951 size=1472 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1720517464 payload=null}
+Oct 18, 2006 2:43:33 PM net.waefers.messaging.MessageControl receive
+FINEST: Found requested message msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1720517464 payload=null}
+Oct 18, 2006 2:43:33 PM net.waefers.messaging.MessageControl send
+FINEST: Response received for id=1720517464
