@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  */
 
 import net.waefers.block.BlockControl;
-import static net.waefers.GlobalControl.log;
+import static net.waefers.GlobalObjects.*;
 
 public class Block implements java.io.Serializable {
 	

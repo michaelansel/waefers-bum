@@ -27,4 +27,8 @@ public class NodeEntry {
 		this.expires = new Date(System.currentTimeMillis() + NODE_TTL*60*1000);
 		
 	}
+	
+	public String toString() {
+		return "{node="+node+" expires="+expires+"}";
+	}
 }

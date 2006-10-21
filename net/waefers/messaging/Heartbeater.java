@@ -14,7 +14,7 @@ public class Heartbeater extends TimerTask {
 	}
 	
 	public void run() {
-		Message msg = new Message(node.uri,URI.create("nodemaster@waefers"),node);
+		Message msg = new Message(node,new Node(URI.create("nodemaster@waefers")));
 		msg.type=Message.Type.HEARTBEAT;
 		MessageControl.send(msg,true);
 	}

@@ -1,6 +1,6 @@
 package net.waefers.messaging;
 
-import static net.waefers.GlobalControl.log;
+import static net.waefers.GlobalObjects.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,6 +15,7 @@ import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Timer;
@@ -23,7 +24,6 @@ import java.util.HashSet;
 
 import net.waefers.messaging.Message.Response;
 import net.waefers.node.NodeControl;
-import static net.waefers.GlobalControl.DEFAULT_PORT;
 
 
 
@@ -61,12 +61,12 @@ public class MessageControl {
 	/**
 	 * HashMap of all messages received sans payload indexed by ID
 	 */
-	private static HashMap<Integer,Message> msgLog = new HashMap<Integer,Message>();
+	protected static HashMap<Integer,Message> msgLog = new HashMap<Integer,Message>();
 	
 	/**
 	 * HashSet of all messages waiting for responses
 	 */
-	private static HashSet<Integer> waiting = new HashSet<Integer>();
+	protected static HashSet<Integer> waiting = new HashSet<Integer>();
 	
 	/**
 	 * Selector and selectionKey
@@ -164,17 +164,23 @@ public class MessageControl {
 			/* Add this message to the list of messages being waited for */
 			waiting.add(msg.id);
 			
+			/* Set the time for the message to die if we haven't received a response yet */
+			Date msgDie = new Date(System.currentTimeMillis() + MESSAGE_TTL*1000);
+			
 			/* Wait for a response */
-			while(rmsg == null) {
-				//log.finest("Waiting for the reply to message id="+msg.id);
+			while(rmsg == null && msgDie.after(new Date(System.currentTimeMillis()))) {
 				rmsg = receive(msg.id,true);
 			}
+			
 			/* Message sent and received, kill cached version */
 			msg.bbuf.clear();
 			log.finest("Response received for id="+msg.id);
 			
-			/* Response recieved, kill the resend thread */
+			/* Response received, kill the resend thread */
 			timer.cancel();
+			
+			/* Response received, remove from waiting list */
+			waiting.remove(msg.id);
 			
 			return rmsg;
 		} catch (Exception e) {
@@ -234,45 +240,10 @@ public class MessageControl {
 			log.throwing("MessageControl", "receive", e);
 		}
 		
-		/* If looking for a message that has already been received and processed */
-		if(msgLog.containsKey(id)) {
-			log.finest("Message already received. Returning noPayload cached version.\nmsg="+msgLog.get(id).toString());
-			/* Return message without the payload */
-			return msgLog.get(id);
-		}
-		
-		/* If looking for a message in the queue */
-		if(queue.containsKey(id)) {
-			Message msg = queue.remove(id);
-			queueList.remove(id);
-			log.finest("Returning message from queue msg="+msg);
-			msgLog.put(msg.id,msg.noPayload());
-			return msg;
-		}
-		
-		/* If looking for first available message and there are messages waiting in the queue */
-		if(!checkID && !queueList.isEmpty()) {
-			/* Remove the first message from the queue */
-			Message msg = queue.remove(queueList.removeFirst());
-			
-			/* If there are people waiting for messages, but not the first one in the queue */
-			if(!waiting.isEmpty() && !waiting.contains(queueList.getFirst())) {
-				msgLog.put(msg.id,msg.noPayload());
-				log.finest("Waiting, but not for first in queueList msg="+msg.toString());
-				return msg;
-			/* If there is nobody waiting for a message */
-			} else if(waiting.isEmpty()) {
-				msgLog.put(msg.id,msg.noPayload());
-				log.finest("Not waiting msg="+msg.toString());
-				return msg;
-			}
-			log.finest("Waiting for first message in queueList msg="+msg.toString());
-			/* Someone is waiting for the first message in the queue, so move it to the end */
-			queueList.addLast(msg.id);
-			queue.put(msg.id, msg);
-			/* Try again! */
-			receive(id,checkID);
-		}
+		Message queued;
+		if(!queueList.isEmpty() 
+				&& (queued = checkQueue(id,checkID,queueList.getFirst())) != null)
+			return queued;
 		
 		Message msg = null;
 
@@ -315,7 +286,7 @@ public class MessageControl {
 				msg.dstSAddr = server.socket().getLocalSocketAddress();
 				
 				//If message has already been received and processed
-				if(msgLog.containsKey(msg.id) && msgLog.get(msg.id).equals(msg.noPayload())) {
+				if(msgLog.containsKey(msg.id) && msgLog.get(msg.id).equals(msg)) {
 					log.finest("Message already recieved, ignoring msg=" + msg.toString());
 					return null;
 				}
@@ -340,7 +311,7 @@ public class MessageControl {
 				
 				if(!checkID) {
 					msgLog.put(msg.id,msg.noPayload());
-					log.finest("Not checking for a certain message id msg="+msg);
+					log.finest("Not checking for a certain message; msg="+msg);
 					return msg;
 				}
 				/* Nobody gets this message, just add it to the queue 
@@ -358,6 +329,60 @@ public class MessageControl {
 	}
 	
 	/**
+	 * Checks the message queue for specific message id and returns it if found;
+	 * if not looking for a specific message, returns the first message in the queue not being waited upon
+	 * @param id Message we are looking for
+	 * @param checkID Whether or not to check for a specific message id
+	 * @param breakOn The first message in the queue, so we know when we have run all the way through the queue
+	 * @return Message, if found; otherwise, null
+	 */
+	private static Message checkQueue(Integer id, boolean checkID, Integer breakOn) {
+		/* If looking for a message that has already been received and processed */
+		if(msgLog.containsKey(id)) {
+			log.finest("Message already received. Returning noPayload cached version.\nmsg="+msgLog.get(id).toString());
+			/* Return message without the payload */
+			return msgLog.get(id);
+		}
+		
+		/* If looking for a message in the queue */
+		if(queue.containsKey(id)) {
+			Message msg = queue.remove(id);
+			queueList.remove(id);
+			log.finest("Returning message from queue msg="+msg);
+			msgLog.put(msg.id,msg.noPayload());
+			return msg;
+		}
+		
+		/* If looking for first available message and there are messages waiting in the queue */
+		if(!checkID && !queueList.isEmpty()) {
+			if(breakOn==queueList.getFirst()) return null;
+			/* Remove the first message from the queue */
+			Message msg = queue.remove(queueList.removeFirst());
+			
+			/* If there are people waiting for messages, but not the first one in the queue */
+			if(!waiting.isEmpty() && !waiting.contains(msg.id)) {
+				msgLog.put(msg.id,msg.noPayload());
+				log.finest("Others are waiting, but not for first in queueList msg="+msg.toString());
+				return msg;
+			/* If there is nobody waiting for a message */
+			} else if(waiting.isEmpty()) {
+				msgLog.put(msg.id,msg.noPayload());
+				log.finest("Not waiting msg="+msg.toString());
+				return msg;
+			}
+			log.finest("Others are waiting for first message in queueList msg="+msg.toString());
+			/* Someone is waiting for the first message in the queue, so move it to the end */
+			queueList.addLast(msg.id);
+			queue.put(msg.id, msg);
+			/* Try again! */
+			//TODO: This is creating an endless loop if there are ANY messages in the queue
+			return checkQueue(id,checkID,breakOn);
+		}
+		/* Nothing in the queue to be returned */
+		return null;
+	}
+	
+	/**
 	 * Creates a new reply by reversing the source and destination
 	 * URIs and giving the new Message the same ID as the old
 	 * @param msg Message to reply to
@@ -366,7 +391,7 @@ public class MessageControl {
 	 */
 	public static Message createReply(Message msg, Response response, Object payload) {
 		if(msg.response!=null) {
-			log.finest("Trying to a reply! Returning null; msg="+msg);
+			log.finest("Trying to reply to a reply! Returning null; msg="+msg);
 			return null;
 		}
 		Message rmsg = new Message(msg.getDestination(),msg.getSource(),payload);

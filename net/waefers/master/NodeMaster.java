@@ -1,10 +1,11 @@
 package net.waefers.master;
 
-import static net.waefers.GlobalControl.log;
+import static net.waefers.GlobalObjects.*;
 import static net.waefers.messaging.Message.Response.ERROR;
 import static net.waefers.messaging.Message.Response.SUCCESS;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.TreeMap;
 
 import net.waefers.GlobalControl;
 import net.waefers.GlobalObjects;
+import net.waefers.PrintStatus;
 import net.waefers.directory.DirectoryCleaner;
 import net.waefers.directory.NodeEntry;
 import net.waefers.messaging.LocationMessage;
@@ -55,7 +57,7 @@ public class NodeMaster extends MasterServer {
 		return nodeExpiry.remove(key);
 	}
 	
-	public void addBlocks(Node node) {
+	public Message addBlocks(Node node) {
 		log.fine("Adding blocks to ReplicaMaster for "+node);
 		LocationMessage lMsg = new LocationMessage();
 		lMsg.action = LocationMessage.Action.ADD;
@@ -65,7 +67,7 @@ public class NodeMaster extends MasterServer {
 		Message msg = new Message(node.uri,URI.create("replicamaster@waefers"),lMsg);
 		msg.type = Message.Type.BLOCK_LOCATION;
 		
-		MessageControl.send(msg,true);
+		return MessageControl.send(msg,true);
 	}
 	
 	/**
@@ -81,17 +83,26 @@ public class NodeMaster extends MasterServer {
 		Message rmsg;
 		NodeEntry src;
 		src = nodeDirectory.get(msg.getSource());
-		log.finest("Heartbeat message received from "+msg.getSource().uri);
+		log.finest("Heartbeat message received from "+msg.getSource());
 		
 		//If node is not in the directory or if it has expired
 		if( src == null || src.expires.before(new Date()) ) {
-			NodeEntry ne = new NodeEntry((Node)msg.getPayload());
-			nodeDirectory.put(((Node)msg.getPayload()).uri,ne);
+			if(msg.getSource().address==null) {
+				msg.getSource().address=(InetSocketAddress)msg.srcSAddr;
+				log.finest("Node has no address; using incoming address="+msg.srcSAddr);
+			}
+			NodeEntry ne = new NodeEntry(msg.getSource());
+			nodeDirectory.put(msg.getSource().uri,ne);
 			ne.updateExpiryTime();
 			nodeExpiry.put(ne.expires,ne);
-			log.fine(msg.getSource() + " registered as " + msg.srcSAddr);
-			if(ne.node.isPeer()) addBlocks(ne.node);
-			rmsg = MessageControl.createReply(msg,SUCCESS,null);
+			log.fine(nodeDirectory.get(msg.getSource().uri).node + " registered as " + msg.srcSAddr);
+			Message rab;
+			if(ne.node.isPeer() && (rab = addBlocks(ne.node))!=null && rab.response==Message.Response.SUCCESS) { 
+				rmsg = MessageControl.createReply(msg,SUCCESS,null);
+			} else {
+				log.finest("Failed to add blocks for node="+ne.node);
+				rmsg = MessageControl.createReply(msg,ERROR,null);
+			}
 		} else if(src.node.address.equals(msg.srcSAddr)) { //If the node is really who it says it is
 			src.updateExpiryTime();
 			log.finer(src.node.uri + " expiration time updated");
@@ -137,6 +148,7 @@ public class NodeMaster extends MasterServer {
 		MessageControl.init();
 		Timer printer = new Timer();
 		printer.schedule(new PrintQueue(), 10*1000, 30*1000);
+		printer.schedule(new PrintStatus(), 0, 10*1000);
 		receiveAndProcess();
 	}
 	
