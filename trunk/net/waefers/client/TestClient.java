@@ -3,7 +3,7 @@
  */
 package net.waefers.client;
 
-import static net.waefers.GlobalControl.log;
+import static net.waefers.GlobalObjects.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -88,7 +88,7 @@ public class TestClient extends Thread{
 
 		MessageControl.init(addr);
 		Timer printer = new Timer();
-		printer.schedule(new PrintQueue(), 10*1000, 30*1000);
+		printer.schedule(new PrintQueue(), 10*1000, HEARTBEAT_TIME*60*1000);
 
 		Timer t = new Timer();
 		t.schedule(new Heartbeater(node),0,10*1000);

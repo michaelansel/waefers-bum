@@ -1,6 +1,6 @@
 package net.waefers.master;
 
-import static net.waefers.GlobalControl.log;
+import static net.waefers.GlobalObjects.*;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Timer;
 
 import net.waefers.GlobalControl;
+import net.waefers.GlobalObjects;
+import net.waefers.PrintStatus;
 import net.waefers.block.Block;
 import net.waefers.messaging.Heartbeater;
 import net.waefers.messaging.LocationMessage;
@@ -80,6 +82,7 @@ public class ReplicaMaster extends MasterServer {
 	
 	public void start() {
 		blockLocs = new HashMap<byte[],HashSet<Node>>();
+		GlobalObjects.blockLocs = blockLocs;
 		MessageControl.initRand();
 		Node node = new Node(URI.create("replicamaster@waefers"));
 		node.type = Node.Type.MASTER;
@@ -87,6 +90,7 @@ public class ReplicaMaster extends MasterServer {
 		t.schedule(new Heartbeater(node), 0, 4*60*1000); //Update ReplicaMaster on NodeMaster every 4 minutes
 		Timer printer = new Timer();
 		printer.schedule(new PrintQueue(), 10*1000, 30*1000);
+		printer.schedule(new PrintStatus(), 0, 10*1000);
 		receiveAndProcess();
 	}
 	

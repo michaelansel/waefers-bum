@@ -11,7 +11,7 @@ import net.waefers.messaging.LocationMessage;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
 
-import static net.waefers.GlobalControl.log;
+import static net.waefers.GlobalObjects.*;
 
 
 

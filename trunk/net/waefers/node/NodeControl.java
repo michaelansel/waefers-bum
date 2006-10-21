@@ -5,11 +5,12 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.URI;
 
-import net.waefers.GlobalObjects;
+import net.waefers.directory.NodeEntry;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
 import net.waefers.node.Node.Type;
 import static net.waefers.GlobalControl.*;
+import static net.waefers.GlobalObjects.*;
 
 
 
@@ -22,11 +23,6 @@ import static net.waefers.GlobalControl.*;
  */
 
 public class NodeControl {
-	
-	/**
-	 * Static node to be used as a starting point for all new peers
-	 */
-	static final Node baseNode = new Node( URI.create("nodemaster@waefers"), new InetSocketAddress("localhost",DEFAULT_PORT), Type.MASTER);
 	
 	public static SocketAddress getSocketAddress(Node node) {
 		log.finest("Finding socket address for node="+node);
@@ -52,9 +48,9 @@ public class NodeControl {
 			}
 			
 			/* If we are the baseNode, get from the directory */
-			//TODO: Could fail if bound to same address as baseNode, but not baseNode
+			//TODO: Could fail if bound to same address as baseNode, but not really baseNode
 			if( baseNode.address.equals(MessageControl.getAddress()) ) {
-				Node foundNode = GlobalObjects.nodeDirectory.get(((Node)msg.getPayload()).uri).node;
+				Node foundNode = getFromDirectory(((Node)msg.getPayload()).uri).node;
 				log.finest("We are the baseNode, getting from directory; node="+node);
 				return foundNode.address;
 			}
@@ -70,4 +66,12 @@ public class NodeControl {
 		return new InetSocketAddress("0.0.0.0",0);
 	}
 
+	
+	public static NodeEntry getFromDirectory(URI uri) {
+		if(!nodeDirectory.containsKey(uri)) {
+			log.finest("URI not in the nodeDirectory; uri="+uri);
+			return null;
+		}
+		return nodeDirectory.get(uri);
+	}
 }

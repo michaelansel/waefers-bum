@@ -81,5 +81,20 @@ public class Node implements java.io.Serializable {
 		return String.format("{type=%s uri=%s #ofblocks=%s address=%s}",
 				type, uri, dataStored.size(), address);
 	}
+	
+	/**
+	 * Returns true if the node type and uri of both nodes are equal
+	 */
+	public boolean equals(Object o) {
+		if(o instanceof Node) {
+			Node n = (Node) o;
+			return (
+					(type == n.type) &&
+					(uri.equals(n.uri))
+					);
+		}
+		else
+			return false;
+	}
 
 }
