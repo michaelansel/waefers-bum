@@ -99,6 +99,8 @@ public class NodeMaster extends MasterServer {
 			Message rab;
 			if(ne.node.isPeer() && (rab = addBlocks(ne.node))!=null && rab.response==Message.Response.SUCCESS) { 
 				rmsg = MessageControl.createReply(msg,SUCCESS,null);
+			} else if(!ne.node.isPeer()) {
+				rmsg = MessageControl.createReply(msg,SUCCESS,null);
 			} else {
 				log.finest("Failed to add blocks for node="+ne.node);
 				rmsg = MessageControl.createReply(msg,ERROR,null);

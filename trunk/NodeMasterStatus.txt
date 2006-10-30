@@ -1,93 +1,10 @@
-Sat Oct 21 16:24:29 CDT 2006
+Mon Oct 30 10:46:25 CST 2006
 Node Directory
 
 
-Sat Oct 21 16:24:39 CDT 2006
+Mon Oct 30 10:46:35 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-
-
-Sat Oct 21 16:24:49 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:24:59 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:25:09 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:25:19 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:25:29 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:25:39 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:25:49 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:25:59 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:26:09 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:26:19 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:26:29 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:26:39 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:26:50 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
-
-
-Sat Oct 21 16:27:00 CDT 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:60595} expires=Sat Oct 21 16:24:35 CDT 2006}}
-{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:44795} expires=Sat Oct 21 16:24:40 CDT 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:30740} expires=Mon Oct 30 10:46:30 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:37095} expires=Mon Oct 30 10:46:34 CST 2006}}
 
 
