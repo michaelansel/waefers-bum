@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
@@ -249,83 +250,91 @@ public class MessageControl {
 
 		/* Receive the next incoming message waiting at the socket layer */
 		try {
-			synchronized(rbuf) {
-				/* Clear the receive buffer before doing anything */
-				rbuf.clear();
-				/* Get the next packet */
-				SocketAddress addr = server.receive(rbuf);
-				if(addr == null) return null;
-				/* Get the buffer ready for reading */
-				rbuf.flip();
-				/* Turn the data into a packet */
-				DatagramPacket pkt = new DatagramPacket(rbuf.array(),rbuf.limit());
-				/* Packet made, clear the buffer */
-				rbuf.clear();
-				if(pkt.getLength() == 0) {
-					log.finest("Null packet");
-					return null;
-				}
-				
-				/* Convert packet back into a Message */
-				ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(pkt.getData()));
-				msg = (Message) ois.readObject();
-				
-				//If bad message or identifier
-				if(msg==null || msg.id==0) {
-					log.finest("Bad message or id=0 msg="+msg);
-					return null;
-				}
-				/* Show that we received a valid packet and successfully converted it back into a Message */
-				log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", addr, pkt.getLength(), msg));
-				
-				/* Destroy the cached version of the message, if there is one (Shouldn't be, it's transient) */
-				msg.bbuf = null;
-				
-				/* Set message return path */
-				msg.srcSAddr = addr;
-				msg.dstSAddr = server.socket().getLocalSocketAddress();
-				
-				//If message has already been received and processed
-				if(msgLog.containsKey(msg.id) && msgLog.get(msg.id).equals(msg)) {
-					log.finest("Message already recieved, ignoring msg=" + msg.toString());
-					return null;
-				}
-				
-				/* If we are looking for this message */
-				if(msg.id==id) {
-					msgLog.put(msg.id,msg.noPayload());
-					log.finest("Found requested message msg="+msg);
-					return msg;
-				}
-				
-				/* If somebody else is waiting for this message
-				 * Put it in the queue and return a recursive receive() call
-				 */
-				if(waiting.contains(msg.id)) {
-					queue.put(msg.id, msg);
-					queueList.add(msg.id);
-					log.finest("Somebody else is looking for this message; queueing msg="+msg);
-					return receive(id,checkID);
-				}
-				
-				
-				if(!checkID) {
-					msgLog.put(msg.id,msg.noPayload());
-					log.finest("Not checking for a certain message; msg="+msg);
-					return msg;
-				}
-				/* Nobody gets this message, just add it to the queue 
-				 * Means we are looking for a specific message, but not this one or any one in the queue
-				 */
-				queue.put(msg.id, msg);
-				queueList.addLast(msg.id);
+			/* Get the next waiting packet from the socket */
+			DatagramPacket pkt = receiveFromSocket();
+			
+			/* If the packet is empty or null, ignore it */
+			if(pkt == null || pkt.getLength() == 0) {
+				if(!(pkt == null)) log.finest("Null packet");
+				return null;
 			}
+			
+			/* Convert packet back into a Message */
+			ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(pkt.getData()));
+			msg = (Message) ois.readObject();
+			
+			//If bad message or identifier
+			if(msg==null || msg.id==0) {
+				log.finest("Bad message or id=0 msg="+msg);
+				return null;
+			}
+			/* Show that we received a valid packet and successfully converted it back into a Message */
+			log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", pkt.getSocketAddress(), pkt.getLength(), msg));
+			
+			/* Destroy the cached version of the message, if there is one (Shouldn't be, it's transient) */
+			msg.bbuf = null;
+			
+			/* Set message return path */
+			msg.srcSAddr = pkt.getSocketAddress();
+			msg.dstSAddr = server.socket().getLocalSocketAddress();
+			
+			//If message has already been received and processed
+			if(msgLog.containsKey(msg.id) && msgLog.get(msg.id).equals(msg)) {
+				log.finest("Message already recieved, ignoring msg=" + msg.toString());
+				return null;
+			}
+			
+			/* If we are looking for this message */
+			if(msg.id==id) {
+				msgLog.put(msg.id,msg.noPayload());
+				log.finest("Found requested message msg="+msg);
+				return msg;
+			}
+			
+			/* If somebody else is waiting for this message
+			 * Put it in the queue and return a recursive receive() call
+			 */
+			if(waiting.contains(msg.id)) {
+				queue.put(msg.id, msg);
+				queueList.add(msg.id);
+				log.finest("Somebody else is looking for this message; queueing msg="+msg);
+				return receive(id,checkID);
+			}
+			
+			
+			if(!checkID) {
+				msgLog.put(msg.id,msg.noPayload());
+				log.finest("Not checking for a certain message; msg="+msg);
+				return msg;
+			}
+			/* Nobody gets this message, just add it to the queue 
+			 * Means we are looking for a specific message, but not this one or any one in the queue
+			 */
+			queue.put(msg.id, msg);
+			queueList.addLast(msg.id);
 		} catch(Exception e) {
 			log.throwing("MasterServer", "run", e);
 			return null;
 		}
 		log.finest("We are looking for a specific message, but it was not found. Sorry!");
 		return null;
+	}
+	
+	private static DatagramPacket receiveFromSocket() throws IOException {
+		synchronized(rbuf) {
+			/* Clear the receive buffer before doing anything */
+			rbuf.clear();
+			/* Get the next packet */
+			SocketAddress addr = server.receive(rbuf);
+			if(addr == null) return null;
+			/* Get the buffer ready for reading */
+			rbuf.flip();
+			/* Turn the data into a packet */
+			DatagramPacket pkt = new DatagramPacket(rbuf.array(),rbuf.limit());
+			pkt.setSocketAddress(addr);
+			
+			return pkt;
+		}
 	}
 	
 	/**
