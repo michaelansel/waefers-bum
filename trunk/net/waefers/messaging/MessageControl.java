@@ -320,6 +320,13 @@ public class MessageControl {
 		return null;
 	}
 	
+	/**
+	 * Returns the next waiting message from the DatagramSocketChannel
+	 * or null if no message is waiting
+	 * 
+	 * @return received DatagramPacket or null if no packet waiting
+	 * @throws IOException
+	 */
 	private static DatagramPacket receiveFromSocket() throws IOException {
 		synchronized(rbuf) {
 			/* Clear the receive buffer before doing anything */
