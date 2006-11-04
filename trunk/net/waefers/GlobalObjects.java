@@ -59,7 +59,7 @@ public class GlobalObjects {
 	public static PrintWriter status;
 	
 	/**
-	 * Time between node heartbeats (minutes
+	 * Time between node heartbeats (minutes)
 	 */
 	public static final int HEARTBEAT_TIME = 5;
 }
