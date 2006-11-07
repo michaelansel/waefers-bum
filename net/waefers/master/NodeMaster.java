@@ -15,13 +15,13 @@ import java.util.TreeMap;
 
 import net.waefers.GlobalControl;
 import net.waefers.GlobalObjects;
+import net.waefers.PrintQueue;
 import net.waefers.PrintStatus;
 import net.waefers.directory.DirectoryCleaner;
 import net.waefers.directory.NodeEntry;
 import net.waefers.messaging.LocationMessage;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
-import net.waefers.messaging.PrintQueue;
 import net.waefers.node.Node;
 
 public class NodeMaster extends MasterServer {
@@ -64,7 +64,7 @@ public class NodeMaster extends MasterServer {
 		lMsg.blocks = node.dataStored;
 		lMsg.node = node;
 		
-		Message msg = new Message(node.uri,URI.create("replicamaster@waefers"),lMsg);
+		Message msg = new Message(node,new Node(URI.create("replicamaster@waefers")),lMsg);
 		msg.type = Message.Type.BLOCK_LOCATION;
 		
 		return MessageControl.send(msg,true);
@@ -77,7 +77,7 @@ public class NodeMaster extends MasterServer {
 	 */
 	protected Message heartbeat(Message msg) {
 		if(msg.response!=null) {
-			log.finest("Killing incoming message with a response already msg="+msg);
+			log.finest("Killing incoming heartbeat message with a response already msg="+msg);
 			return null;
 		}
 		Message rmsg;
@@ -97,7 +97,7 @@ public class NodeMaster extends MasterServer {
 			nodeExpiry.put(ne.expires,ne);
 			log.fine(nodeDirectory.get(msg.getSource().uri).node + " registered as " + msg.srcSAddr);
 			Message rab;
-			if(ne.node.isPeer() && (rab = addBlocks(ne.node))!=null && rab.response==Message.Response.SUCCESS) { 
+			if(ne.node.isPeer() && (rab = addBlocks(ne.node))!=null && rab.response==SUCCESS) { 
 				rmsg = MessageControl.createReply(msg,SUCCESS,null);
 			} else if(!ne.node.isPeer()) {
 				rmsg = MessageControl.createReply(msg,SUCCESS,null);

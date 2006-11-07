@@ -45,7 +45,7 @@ public class MessageControl {
 	/**
 	 * Receive buffer
 	 */
-	private static ByteBuffer rbuf = ByteBuffer.wrap(new byte[1472]);
+	private static ByteBuffer rbuf = ByteBuffer.wrap(new byte[MAX_MESSAGE_SIZE]);
 	
 	/**
 	 * Incoming message queue
@@ -94,8 +94,8 @@ public class MessageControl {
 			selector = Selector.open();
 			server.configureBlocking(false);
 			key = server.register(selector, SelectionKey.OP_READ);
+			
 			server.socket().bind(localAddr);
-			bos = new ByteArrayOutputStream(1472);
 			initialized = true;
 			
 			log.finest("MessageControl initialized on "+localAddr);
@@ -145,7 +145,8 @@ public class MessageControl {
 	 */
 	public static Message send(Message msg,boolean verify) {
 		try {
-			if(msg.bbuf != null) msg.bbuf.clear();
+			if(msg.bbuf != null) msg.bbuf=null;
+			bos = new ByteArrayOutputStream(MAX_MESSAGE_SIZE);
 			ObjectOutputStream oos = new ObjectOutputStream(bos);
 			oos.writeObject(msg);
 			oos.close();
@@ -156,7 +157,7 @@ public class MessageControl {
 
 			Timer timer = new Timer();
 			new SendTimerTask(msg).run();
-			timer.schedule( new SendTimerTask(msg), (long) 10*1000, (long) 10*1000 ); //Schedule the resender
+			timer.schedule( new SendTimerTask(msg), (long) 10*1000, (long) MESSAGE_TTL / 5 ); //Schedule the resender to resend the message 5 times before killing
 
 			if(!verify) {
 				timer.cancel();
@@ -270,9 +271,6 @@ public class MessageControl {
 			}
 			/* Show that we received a valid packet and successfully converted it back into a Message */
 			log.finer(String.format("RECEIVED: addr=%s size=%d msg=%s", pkt.getSocketAddress(), pkt.getLength(), msg));
-			
-			/* Destroy the cached version of the message, if there is one (Shouldn't be, it's transient) */
-			msg.bbuf = null;
 			
 			/* Set message return path */
 			msg.srcSAddr = pkt.getSocketAddress();

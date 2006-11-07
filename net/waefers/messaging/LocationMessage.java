@@ -32,4 +32,9 @@ public class LocationMessage extends Message {
 	 */
 	public Node node;
 	
+	public String toString() {
+		return String.format("{action=%s node=%s blocks=%s}",
+				action, node, blocks);
+	}
+	
 }
