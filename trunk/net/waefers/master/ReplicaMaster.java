@@ -1,6 +1,7 @@
 package net.waefers.master;
 
 import static net.waefers.GlobalObjects.*;
+import static net.waefers.GlobalControl.*;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,13 +11,13 @@ import java.util.Timer;
 
 import net.waefers.GlobalControl;
 import net.waefers.GlobalObjects;
+import net.waefers.PrintQueue;
 import net.waefers.PrintStatus;
 import net.waefers.block.Block;
 import net.waefers.messaging.Heartbeater;
 import net.waefers.messaging.LocationMessage;
 import net.waefers.messaging.Message;
 import net.waefers.messaging.MessageControl;
-import net.waefers.messaging.PrintQueue;
 import net.waefers.node.Node;
 
 public class ReplicaMaster extends MasterServer {
@@ -32,7 +33,7 @@ public class ReplicaMaster extends MasterServer {
 	/**
 	 * Current nodes registered on the NodeMaster
 	 */
-	private HashSet<Node> curNodes;
+	private static HashSet<Node> curNodes;
 	
 //Methods specific to this Server	
 	
@@ -47,33 +48,52 @@ public class ReplicaMaster extends MasterServer {
 		
 		switch(lMsg.action) {
 		case ADD:
-			Message.Response[] status = null;
+			Message.Response[] status = new Message.Response[lMsg.blocks.size()];
 			int x = 0;
 			curNodes.add(lMsg.node);
 			
+			Object[] blocks = lMsg.blocks.toArray();
+			
 			//For every block on the peer
-			for( Block block : (Block[]) lMsg.blocks.toArray() ) {
-				log.finest("Adding block:" + block.id + " to directory\n");
+			for( Object objBlock : blocks ) {
+				Block block = new Block();
+				if(objBlock instanceof Block)
+					block = (Block) objBlock;
+				if(block.id == null) continue;
+				log.finest("Adding block:" + byteArrayToHexString(block.id) + " to directory");
 				boolean success = false;
 				//If the block is already in the directory
 				if( blockLocs.containsKey(block) ) {
 					//Add the node to the end of the set of nodes for this block
-					success = blockLocs.get(block).add(lMsg.node);
-					log.finest("Node added to existing block list");
+					blockLocs.get(block).add(lMsg.node);
+					success = (blockLocs.get(block.id).contains(lMsg.node));
+					if(success)
+						log.finest("Node added to existing block list");
 				} else {
 					//Create a new node set
 					HashSet<Node> hs = new HashSet<Node>();
 					//Add the node to the new set
 					hs.add(lMsg.node);
 					//Add the new set to the directory
-					if(blockLocs.put(block.id, hs)!=null) success=true;
-					log.finest("Node added to new block list");
+					blockLocs.put(block.id, hs);
+					success = (blockLocs.get(block.id).contains(lMsg.node));
+					if(success) {
+						log.finest("Node added to new block list");
+					}
 				}
 				//Set rmsg to action status
-				if(success) status[x] = Message.Response.SUCCESS;
 				status[x] = Message.Response.ERROR;
+				if(success) status[x] = Message.Response.SUCCESS;
 				x++;
 			}
+			
+			rmsg = MessageControl.createReply(msg, Message.Response.SUCCESS, status);
+			
+			for(Message.Response status2 : status) {
+				if(status2 != Message.Response.SUCCESS)
+					rmsg.response = Message.Response.ERROR;
+			}
+			
 			break;
 		}
 
@@ -83,6 +103,8 @@ public class ReplicaMaster extends MasterServer {
 	public void start() {
 		blockLocs = new HashMap<byte[],HashSet<Node>>();
 		GlobalObjects.blockLocs = blockLocs;
+		curNodes = new HashSet<Node>();
+		GlobalObjects.curNodes = curNodes;
 		MessageControl.initRand();
 		Node node = new Node(URI.create("replicamaster@waefers"));
 		node.type = Node.Type.MASTER;

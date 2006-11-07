@@ -1,5 +1,6 @@
 package net.waefers.messaging;
 
+import java.io.ByteArrayOutputStream;
 import java.net.SocketAddress;
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -186,5 +187,14 @@ public class Message implements java.io.Serializable {
 	public String toString() {
 		return String.format("{type=%s response=%s src=%s dst=%s id=%d payload=%s}",
 				type, response, source, destination, id, payload);
+	}
+
+	public ByteBuffer getSerialized() {
+		return this.bbuf;
+	}
+
+	public void setSerialized(ByteBuffer buffer) {
+		this.bbuf = buffer;
+		
 	}
 }

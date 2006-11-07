@@ -1,4 +1,4 @@
-package net.waefers.messaging;
+package net.waefers;
 
 import static net.waefers.GlobalObjects.*;
 import static net.waefers.messaging.MessageControl.*;

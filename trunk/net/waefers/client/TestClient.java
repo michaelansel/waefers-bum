@@ -15,10 +15,11 @@ import java.util.ArrayList;
 import java.util.Timer;
 
 import net.waefers.GlobalControl;
+import net.waefers.PrintQueue;
+import net.waefers.PrintStatus;
 import net.waefers.block.Block;
 import net.waefers.messaging.Heartbeater;
 import net.waefers.messaging.MessageControl;
-import net.waefers.messaging.PrintQueue;
 import net.waefers.node.Node;
 
 /**
@@ -28,7 +29,7 @@ import net.waefers.node.Node;
  * @author Michael Ansel
  *
  */
-public class TestClient extends Thread{
+public class TestClient extends Thread {
 
 	
 	/**
@@ -88,10 +89,11 @@ public class TestClient extends Thread{
 
 		MessageControl.init(addr);
 		Timer printer = new Timer();
-		printer.schedule(new PrintQueue(), 10*1000, HEARTBEAT_TIME*60*1000);
+		printer.schedule(new PrintQueue(), 10*1000, 30*1000);
+		printer.schedule(new PrintStatus(), 0, 10*1000);
 
 		Timer t = new Timer();
-		t.schedule(new Heartbeater(node),0,10*1000);
+		t.schedule(new Heartbeater(node),0,HEARTBEAT_TIME*60*1000);
 		
 		} catch(Exception e) {
 			log.throwing("TestClient", "main", e);

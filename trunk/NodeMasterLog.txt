@@ -1,1287 +1,947 @@
-Nov 4, 2006 12:37:04 PM net.waefers.master.NodeMaster start
+Nov 6, 2006 9:24:19 PM net.waefers.master.NodeMaster start
 FINEST: NM-Start
-Nov 4, 2006 12:37:04 PM net.waefers.messaging.MessageControl init
+Nov 6, 2006 9:24:19 PM net.waefers.messaging.MessageControl init
 FINEST: MessageControl initialized on localhost/127.0.0.1:51951
-Nov 4, 2006 12:37:04 PM net.waefers.master.MasterServer receiveAndProcess
+Nov 6, 2006 9:24:19 PM net.waefers.master.MasterServer receiveAndProcess
 FINEST: Master server run method starting
-Nov 4, 2006 12:37:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:24:19 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:37:04 CST 2006
+Mon Nov 06 21:24:19 CST 2006
 Node Directory
 
-Nov 4, 2006 12:37:08 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=816 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:37:08 PM net.waefers.messaging.MessageControl receive
-FINEST: Not checking for a certain message; msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:37:08 PM net.waefers.master.NodeMaster heartbeat
+Nov 6, 2006 9:24:23 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:4130 size=816 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=288055070 payload=null}
+Nov 6, 2006 9:24:23 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message; msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=288055070 payload=null}
+Nov 6, 2006 9:24:23 PM net.waefers.master.NodeMaster heartbeat
 FINEST: Heartbeat message received from {type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}
-Nov 4, 2006 12:37:08 PM net.waefers.master.NodeMaster heartbeat
-FINEST: Node has no address; using incoming address=/127.0.0.1:16504
-Nov 4, 2006 12:37:08 PM net.waefers.master.NodeMaster heartbeat
-FINE: {type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} registered as /127.0.0.1:16504
-Nov 4, 2006 12:37:08 PM net.waefers.master.NodeMaster heartbeat
-FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} id=901585632 payload=null}
-Nov 4, 2006 12:37:08 PM net.waefers.messaging.MessageControl$SendTimerTask run
-FINER: SENT: addr=/127.0.0.1:16504 size=1133 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} id=901585632 payload=null}
-Nov 4, 2006 12:37:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:24:23 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Node has no address; using incoming address=/127.0.0.1:4130
+Nov 6, 2006 9:24:23 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} registered as /127.0.0.1:4130
+Nov 6, 2006 9:24:23 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} id=288055070 payload=null}
+Nov 6, 2006 9:24:23 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:4130 size=1133 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} id=288055070 payload=null}
+Nov 6, 2006 9:24:29 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:57074 size=1045 msg={type=HEARTBEAT response=null src={type=PEER uri=testpeer@waefers #ofblocks=1 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=62896442 payload=null}
+Nov 6, 2006 9:24:29 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message; msg={type=HEARTBEAT response=null src={type=PEER uri=testpeer@waefers #ofblocks=1 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=62896442 payload=null}
+Nov 6, 2006 9:24:29 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Heartbeat message received from {type=PEER uri=testpeer@waefers #ofblocks=1 address=null}
+Nov 6, 2006 9:24:29 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Node has no address; using incoming address=/127.0.0.1:57074
+Nov 6, 2006 9:24:29 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} registered as /127.0.0.1:57074
+Nov 6, 2006 9:24:29 PM net.waefers.master.NodeMaster addBlocks
+FINE: Adding blocks to ReplicaMaster for {type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074}
+Nov 6, 2006 9:24:29 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: Finding socket address for node={type=null uri=replicamaster@waefers #ofblocks=0 address=null}
+Nov 6, 2006 9:24:29 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: We are the baseNode, getting from directory; node={type=null uri=replicamaster@waefers #ofblocks=0 address=null}
+Nov 6, 2006 9:24:29 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:4130 size=1506 msg={type=BLOCK_LOCATION response=null src={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1553982793 payload={action=ADD node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} blocks=[net.waefers.block.Block@ed662d]}}
+Nov 6, 2006 9:24:29 PM net.waefers.PrintStatus run
+FINEST: Writing status to file
+Mon Nov 06 21:24:29 CST 2006
+Node Directory
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
+
+Nov 6, 2006 9:24:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:37:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:24:30 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:4130 size=1457 msg={type=BLOCK_LOCATION response=SUCCESS src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=1553982793 payload=[Lnet.waefers.messaging.Message$Response;@9d6065}
+Nov 6, 2006 9:24:30 PM net.waefers.messaging.MessageControl receive
+FINEST: Found requested message msg={type=BLOCK_LOCATION response=SUCCESS src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=1553982793 payload=[Lnet.waefers.messaging.Message$Response;@9d6065}
+Nov 6, 2006 9:24:30 PM net.waefers.messaging.MessageControl send
+FINEST: Response received for id=1553982793
+Nov 6, 2006 9:24:30 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=62896442 payload=null}
+Nov 6, 2006 9:24:30 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:57074 size=1362 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=62896442 payload=null}
+Nov 6, 2006 9:24:39 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:37:14 CST 2006
+Mon Nov 06 21:24:39 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:37:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:24:49 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:37:24 CST 2006
+Mon Nov 06 21:24:49 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:37:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:24:59 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:37:34 CST 2006
+Mon Nov 06 21:24:59 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:37:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:25:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:37:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:25:09 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:37:44 CST 2006
+Mon Nov 06 21:25:09 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:37:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:25:19 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:37:54 CST 2006
+Mon Nov 06 21:25:19 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:38:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:25:29 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:38:04 CST 2006
+Mon Nov 06 21:25:29 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:38:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:25:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:38:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:25:39 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:38:14 CST 2006
+Mon Nov 06 21:25:39 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:38:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:25:49 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:38:24 CST 2006
+Mon Nov 06 21:25:49 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:38:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:25:59 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:38:34 CST 2006
+Mon Nov 06 21:25:59 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:38:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:26:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:38:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:26:09 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:38:44 CST 2006
+Mon Nov 06 21:26:09 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:38:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:26:19 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:38:54 CST 2006
+Mon Nov 06 21:26:19 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:39:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:26:29 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:39:04 CST 2006
+Mon Nov 06 21:26:29 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:39:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:26:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:39:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:26:39 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:39:14 CST 2006
+Mon Nov 06 21:26:39 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:39:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:26:49 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:39:24 CST 2006
+Mon Nov 06 21:26:49 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:39:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:26:59 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:39:34 CST 2006
+Mon Nov 06 21:26:59 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:39:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:27:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:39:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:27:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:39:44 CST 2006
+Mon Nov 06 21:27:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:39:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:27:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:39:54 CST 2006
+Mon Nov 06 21:27:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:40:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:40:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:40:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:27:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:40:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:27:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:40:14 CST 2006
+Mon Nov 06 21:27:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:40:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:27:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:40:24 CST 2006
+Mon Nov 06 21:27:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:40:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:27:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:40:34 CST 2006
+Mon Nov 06 21:27:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:40:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:28:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:40:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:28:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:40:44 CST 2006
+Mon Nov 06 21:28:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:40:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:28:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:40:54 CST 2006
+Mon Nov 06 21:28:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:41:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:28:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:41:04 CST 2006
+Mon Nov 06 21:28:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:24:23 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:41:08 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:08 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:28:22 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:4130 size=816 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=288055074 payload=null}
+Nov 6, 2006 9:28:22 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message; msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=288055074 payload=null}
+Nov 6, 2006 9:28:22 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Heartbeat message received from {type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}
+Nov 6, 2006 9:28:22 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Node has no address; using incoming address=/127.0.0.1:4130
+Nov 6, 2006 9:28:22 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} registered as /127.0.0.1:4130
+Nov 6, 2006 9:28:22 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} id=288055074 payload=null}
+Nov 6, 2006 9:28:22 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:4130 size=1133 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} id=288055074 payload=null}
+Nov 6, 2006 9:28:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:41:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:28:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:41:14 CST 2006
+Mon Nov 06 21:28:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:41:18 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:18 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:28:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:41:24 CST 2006
+Mon Nov 06 21:28:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:41:28 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:28 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:28:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:41:34 CST 2006
+Mon Nov 06 21:28:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:41:38 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:38 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:29:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:41:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:29:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:41:44 CST 2006
+Mon Nov 06 21:29:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:41:48 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:48 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:29:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:41:54 CST 2006
+Mon Nov 06 21:29:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:41:58 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:41:58 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:42:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:29:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:42:04 CST 2006
+Mon Nov 06 21:29:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:24:29 CST 2006}}
 
-Nov 4, 2006 12:42:08 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:42:08 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:42:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:29:29 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:57074 size=1045 msg={type=HEARTBEAT response=null src={type=PEER uri=testpeer@waefers #ofblocks=1 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=62896444 payload=null}
+Nov 6, 2006 9:29:29 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message; msg={type=HEARTBEAT response=null src={type=PEER uri=testpeer@waefers #ofblocks=1 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=62896444 payload=null}
+Nov 6, 2006 9:29:29 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Heartbeat message received from {type=PEER uri=testpeer@waefers #ofblocks=1 address=null}
+Nov 6, 2006 9:29:29 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Node has no address; using incoming address=/127.0.0.1:57074
+Nov 6, 2006 9:29:29 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} registered as /127.0.0.1:57074
+Nov 6, 2006 9:29:29 PM net.waefers.master.NodeMaster addBlocks
+FINE: Adding blocks to ReplicaMaster for {type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074}
+Nov 6, 2006 9:29:29 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: Finding socket address for node={type=null uri=replicamaster@waefers #ofblocks=0 address=null}
+Nov 6, 2006 9:29:29 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: We are the baseNode, getting from directory; node={type=null uri=replicamaster@waefers #ofblocks=0 address=null}
+Nov 6, 2006 9:29:29 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:4130 size=1506 msg={type=BLOCK_LOCATION response=null src={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1553982801 payload={action=ADD node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} blocks=[net.waefers.block.Block@8a548b]}}
+Nov 6, 2006 9:29:29 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:4130 size=1457 msg={type=BLOCK_LOCATION response=SUCCESS src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=1553982801 payload=[Lnet.waefers.messaging.Message$Response;@6210fb}
+Nov 6, 2006 9:29:29 PM net.waefers.messaging.MessageControl receive
+FINEST: Found requested message msg={type=BLOCK_LOCATION response=SUCCESS src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=1553982801 payload=[Lnet.waefers.messaging.Message$Response;@6210fb}
+Nov 6, 2006 9:29:29 PM net.waefers.messaging.MessageControl send
+FINEST: Response received for id=1553982801
+Nov 6, 2006 9:29:29 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=62896444 payload=null}
+Nov 6, 2006 9:29:29 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:57074 size=1362 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=62896444 payload=null}
+Nov 6, 2006 9:29:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:42:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:29:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:42:14 CST 2006
+Mon Nov 06 21:29:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:42:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:29:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:42:24 CST 2006
+Mon Nov 06 21:29:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:42:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:29:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:42:34 CST 2006
+Mon Nov 06 21:29:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:42:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:30:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:42:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:30:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:42:44 CST 2006
+Mon Nov 06 21:30:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:42:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:30:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:42:54 CST 2006
+Mon Nov 06 21:30:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:43:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:30:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:43:04 CST 2006
+Mon Nov 06 21:30:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:43:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:30:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:43:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:30:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:43:14 CST 2006
+Mon Nov 06 21:30:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:43:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:30:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:43:24 CST 2006
+Mon Nov 06 21:30:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:43:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:30:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:43:34 CST 2006
+Mon Nov 06 21:30:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:43:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:31:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:43:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:31:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:43:44 CST 2006
+Mon Nov 06 21:31:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:43:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:31:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:43:54 CST 2006
+Mon Nov 06 21:31:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:44:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:31:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:44:04 CST 2006
+Mon Nov 06 21:31:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:44:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:31:30 PM net.waefers.PrintStatus run
+FINEST: Writing status to file
+Mon Nov 06 21:31:30 CST 2006
+Node Directory
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
+
+Nov 6, 2006 9:31:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:44:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:31:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:44:14 CST 2006
+Mon Nov 06 21:31:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:44:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:31:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:44:24 CST 2006
+Mon Nov 06 21:31:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:44:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:32:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:44:34 CST 2006
+Mon Nov 06 21:32:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:44:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:32:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:44:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:32:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:44:44 CST 2006
+Mon Nov 06 21:32:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:44:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:32:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:44:54 CST 2006
+Mon Nov 06 21:32:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:28:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:45:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:32:22 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:4130 size=816 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=288055078 payload=null}
+Nov 6, 2006 9:32:22 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message; msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=288055078 payload=null}
+Nov 6, 2006 9:32:22 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Heartbeat message received from {type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}
+Nov 6, 2006 9:32:22 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Node has no address; using incoming address=/127.0.0.1:4130
+Nov 6, 2006 9:32:22 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} registered as /127.0.0.1:4130
+Nov 6, 2006 9:32:22 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} id=288055078 payload=null}
+Nov 6, 2006 9:32:22 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:4130 size=1133 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} id=288055078 payload=null}
+Nov 6, 2006 9:32:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:45:04 CST 2006
+Mon Nov 06 21:32:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:45:08 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:08 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:32:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:45:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:32:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:45:14 CST 2006
+Mon Nov 06 21:32:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:45:18 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:18 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:32:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:45:24 CST 2006
+Mon Nov 06 21:32:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:45:28 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:28 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:33:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:45:34 CST 2006
+Mon Nov 06 21:33:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:45:38 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:38 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:33:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:45:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:33:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:45:44 CST 2006
+Mon Nov 06 21:33:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:45:48 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:48 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:33:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:45:54 CST 2006
+Mon Nov 06 21:33:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:45:58 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:45:58 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:46:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:46:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:46:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:33:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:46:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:33:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:46:14 CST 2006
+Mon Nov 06 21:33:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:46:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:33:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:46:24 CST 2006
+Mon Nov 06 21:33:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:46:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:33:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:46:34 CST 2006
+Mon Nov 06 21:33:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:46:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:34:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:46:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:34:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:46:44 CST 2006
+Mon Nov 06 21:34:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:46:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:34:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:46:54 CST 2006
+Mon Nov 06 21:34:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:47:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:34:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:47:04 CST 2006
+Mon Nov 06 21:34:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:29:29 CST 2006}}
 
-Nov 4, 2006 12:47:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:34:29 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:57074 size=1045 msg={type=HEARTBEAT response=null src={type=PEER uri=testpeer@waefers #ofblocks=1 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=62896446 payload=null}
+Nov 6, 2006 9:34:29 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message; msg={type=HEARTBEAT response=null src={type=PEER uri=testpeer@waefers #ofblocks=1 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=62896446 payload=null}
+Nov 6, 2006 9:34:29 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Heartbeat message received from {type=PEER uri=testpeer@waefers #ofblocks=1 address=null}
+Nov 6, 2006 9:34:29 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Node has no address; using incoming address=/127.0.0.1:57074
+Nov 6, 2006 9:34:29 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} registered as /127.0.0.1:57074
+Nov 6, 2006 9:34:29 PM net.waefers.master.NodeMaster addBlocks
+FINE: Adding blocks to ReplicaMaster for {type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074}
+Nov 6, 2006 9:34:29 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: Finding socket address for node={type=null uri=replicamaster@waefers #ofblocks=0 address=null}
+Nov 6, 2006 9:34:29 PM net.waefers.node.NodeControl getSocketAddress
+FINEST: We are the baseNode, getting from directory; node={type=null uri=replicamaster@waefers #ofblocks=0 address=null}
+Nov 6, 2006 9:34:29 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:4130 size=1506 msg={type=BLOCK_LOCATION response=null src={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} dst={type=null uri=replicamaster@waefers #ofblocks=0 address=null} id=1553982809 payload={action=ADD node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} blocks=[net.waefers.block.Block@17200b4]}}
+Nov 6, 2006 9:34:29 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:4130 size=1457 msg={type=BLOCK_LOCATION response=SUCCESS src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=1553982809 payload=[Lnet.waefers.messaging.Message$Response;@6754d6}
+Nov 6, 2006 9:34:29 PM net.waefers.messaging.MessageControl receive
+FINEST: Found requested message msg={type=BLOCK_LOCATION response=SUCCESS src={type=null uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=1553982809 payload=[Lnet.waefers.messaging.Message$Response;@6754d6}
+Nov 6, 2006 9:34:29 PM net.waefers.messaging.MessageControl send
+FINEST: Response received for id=1553982809
+Nov 6, 2006 9:34:29 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=62896446 payload=null}
+Nov 6, 2006 9:34:29 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:57074 size=1362 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} id=62896446 payload=null}
+Nov 6, 2006 9:34:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:47:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:34:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:47:14 CST 2006
+Mon Nov 06 21:34:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:47:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:34:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:47:24 CST 2006
+Mon Nov 06 21:34:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:47:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:34:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:47:34 CST 2006
+Mon Nov 06 21:34:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:47:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:35:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:47:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:35:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:47:44 CST 2006
+Mon Nov 06 21:35:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:47:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:35:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:47:54 CST 2006
+Mon Nov 06 21:35:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:48:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:35:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:48:04 CST 2006
+Mon Nov 06 21:35:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:48:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:35:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:48:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:35:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:48:14 CST 2006
+Mon Nov 06 21:35:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:48:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:35:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:48:24 CST 2006
+Mon Nov 06 21:35:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:48:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:35:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:48:34 CST 2006
+Mon Nov 06 21:35:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:48:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:36:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:48:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:36:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:48:44 CST 2006
+Mon Nov 06 21:36:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:48:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:36:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:48:54 CST 2006
+Mon Nov 06 21:36:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:49:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:36:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:49:04 CST 2006
+Mon Nov 06 21:36:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:32:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:49:08 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:08 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:36:22 PM net.waefers.messaging.MessageControl receive
+FINER: RECEIVED: addr=/127.0.0.1:4130 size=816 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=288055082 payload=null}
+Nov 6, 2006 9:36:22 PM net.waefers.messaging.MessageControl receive
+FINEST: Not checking for a certain message; msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=288055082 payload=null}
+Nov 6, 2006 9:36:22 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Heartbeat message received from {type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null}
+Nov 6, 2006 9:36:22 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Node has no address; using incoming address=/127.0.0.1:4130
+Nov 6, 2006 9:36:22 PM net.waefers.master.NodeMaster heartbeat
+FINE: {type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} registered as /127.0.0.1:4130
+Nov 6, 2006 9:36:22 PM net.waefers.master.NodeMaster heartbeat
+FINEST: Returning reply msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} id=288055082 payload=null}
+Nov 6, 2006 9:36:22 PM net.waefers.messaging.MessageControl$SendTimerTask run
+FINER: SENT: addr=/127.0.0.1:4130 size=1133 msg={type=HEARTBEAT response=SUCCESS src={type=null uri=nodemaster@waefers #ofblocks=0 address=null} dst={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} id=288055082 payload=null}
+Nov 6, 2006 9:36:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:49:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:36:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:49:14 CST 2006
+Mon Nov 06 21:36:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:49:18 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:18 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:36:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:49:24 CST 2006
+Mon Nov 06 21:36:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:49:28 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:28 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:36:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:49:34 CST 2006
+Mon Nov 06 21:36:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:49:38 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:38 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:37:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:49:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:37:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:49:44 CST 2006
+Mon Nov 06 21:37:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:49:48 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:48 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:37:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:49:54 CST 2006
+Mon Nov 06 21:37:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:49:58 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:49:58 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:50:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:37:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:50:04 CST 2006
+Mon Nov 06 21:37:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:50:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:37:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:50:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:37:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:50:14 CST 2006
+Mon Nov 06 21:37:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:50:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:37:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:50:24 CST 2006
+Mon Nov 06 21:37:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:50:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:37:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:50:34 CST 2006
+Mon Nov 06 21:37:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:50:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:38:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:50:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:38:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:50:44 CST 2006
+Mon Nov 06 21:38:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:50:54 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:38:10 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:50:54 CST 2006
+Mon Nov 06 21:38:10 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:51:04 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:38:20 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:51:04 CST 2006
+Mon Nov 06 21:38:20 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:51:14 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:38:30 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:51:14 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:38:30 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:51:14 CST 2006
+Mon Nov 06 21:38:30 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:51:24 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:38:40 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:51:24 CST 2006
+Mon Nov 06 21:38:40 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:51:34 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:38:50 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:51:34 CST 2006
+Mon Nov 06 21:38:50 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
-Nov 4, 2006 12:51:44 PM net.waefers.messaging.PrintQueue run
+Nov 6, 2006 9:39:00 PM net.waefers.PrintQueue run
 FINEST: Message Queue
 Message QueueList
 Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
 Waiting List
 
-Nov 4, 2006 12:51:44 PM net.waefers.PrintStatus run
+Nov 6, 2006 9:39:00 PM net.waefers.PrintStatus run
 FINEST: Writing status to file
-Sat Nov 04 12:51:44 CST 2006
+Mon Nov 06 21:39:00 CST 2006
 Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:51:54 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:51:54 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:52:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:52:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:52:14 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:52:14 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:52:14 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:52:24 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:52:24 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:52:34 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:52:34 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:52:44 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:52:44 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:52:44 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:52:54 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:52:54 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:53:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:53:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:53:08 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:08 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:14 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:53:14 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:53:14 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:53:18 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:18 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:24 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:53:24 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:53:28 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:28 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:34 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:53:34 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:53:38 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:38 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:44 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:53:44 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:53:44 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:53:48 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:48 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:54 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:53:54 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:53:58 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:53:58 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:54:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:54:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:54:14 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:54:14 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:54:14 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:54:24 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:54:24 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:54:34 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:54:34 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:54:44 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:54:44 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:54:44 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:54:54 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:54:54 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:55:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:55:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:55:14 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:55:14 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:55:14 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:55:24 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:55:24 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:55:34 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:55:34 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:55:44 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:55:44 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:55:44 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:55:54 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:55:54 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:56:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:56:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:56:14 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:56:14 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:56:14 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:56:24 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:56:24 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:56:34 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:56:34 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:56:44 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:56:44 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:56:44 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:56:54 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:56:54 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:57:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:57:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:57:08 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:08 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:14 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:57:14 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:57:14 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:57:18 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:18 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:24 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:57:24 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:57:28 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:28 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:34 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:57:34 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:57:38 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:38 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:44 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:57:44 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:57:44 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:57:48 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:48 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:54 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:57:54 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:57:58 PM net.waefers.messaging.MessageControl receive
-FINER: RECEIVED: addr=/127.0.0.1:16504 size=1472 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:57:58 PM net.waefers.messaging.MessageControl receive
-FINEST: Message already recieved, ignoring msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=null} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}
-Nov 4, 2006 12:58:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:58:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:58:14 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:58:14 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:58:14 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:58:24 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:58:24 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:58:34 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:58:34 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:58:44 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:58:44 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:58:44 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:58:54 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:58:54 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:59:04 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:59:04 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:59:14 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:59:14 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:59:14 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:59:24 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:59:24 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:59:34 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:59:34 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
-
-Nov 4, 2006 12:59:44 PM net.waefers.messaging.PrintQueue run
-FINEST: Message Queue
-Message QueueList
-Message Log
-{id=901585632 msg={type=HEARTBEAT response=null src={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} dst={type=null uri=nodemaster@waefers #ofblocks=0 address=null} id=901585632 payload=null}}
-Waiting List
-
-Nov 4, 2006 12:59:44 PM net.waefers.PrintStatus run
-FINEST: Writing status to file
-Sat Nov 04 12:59:44 CST 2006
-Node Directory
-{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:16504} expires=Sat Nov 04 12:37:08 CST 2006}}
+{uri=replicamaster@waefers nodeEntry={node={type=MASTER uri=replicamaster@waefers #ofblocks=0 address=/127.0.0.1:4130} expires=Mon Nov 06 21:36:22 CST 2006}}
+{uri=testpeer@waefers nodeEntry={node={type=PEER uri=testpeer@waefers #ofblocks=1 address=/127.0.0.1:57074} expires=Mon Nov 06 21:34:29 CST 2006}}
 
