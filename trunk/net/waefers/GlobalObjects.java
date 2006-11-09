@@ -82,7 +82,7 @@ public class GlobalObjects {
 	/**
 	 * Static node to be used as a starting point for all new peers
 	 */
-	public static final Node baseNode = new Node( URI.create("nodemaster@waefers"), new InetSocketAddress("localhost",DEFAULT_PORT), Type.MASTER);
+	public static final Node baseNode = new Node( URI.create("nodemaster@waefers"), new InetSocketAddress("baseNode",DEFAULT_PORT), Type.MASTER);
 	
 	/**
 	 * Global status file
