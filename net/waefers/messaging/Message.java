@@ -140,6 +140,11 @@ public class Message implements java.io.Serializable {
 		return msg;
 	}
 	
+	/**
+	 * Clones this Message and returns the clone sans payload
+	 * 
+	 * @return cloned Message without a payload
+	 */
 	public Message noPayload() {
 		Message msg;
 		msg = (Message) this.clone();

@@ -73,6 +73,25 @@ public class Node implements java.io.Serializable {
 		return type == Type.PEER;
 	}
 	
+	/**
+	 * Clones the Node and returns the clone with only URI and routing information
+	 * @return Cloned Node with only routing info
+	 */
+	public Node routing() {
+		Node n = new Node(this.uri,this.address,this.type);
+		return n;
+	}
+	
+	/**
+	 * Clones the Node and returns the clone with only URI and block information
+	 * @return Cloned Node with only block info
+	 */
+	public Node blocks() {
+		Node n = new Node(this.uri);
+		n.dataStored = this.dataStored;
+		return n;
+	}
+	
 	public int hashCode() {
 		return uri.hashCode() ^ dataStored.hashCode();
 	}
