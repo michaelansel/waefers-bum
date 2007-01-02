@@ -40,6 +40,7 @@ public class XorMappingTest {
 		return best;
 	}
 	
+	@SuppressWarnings("unchecked")
 	static void buildMap()
 	{
 		map.clear();
